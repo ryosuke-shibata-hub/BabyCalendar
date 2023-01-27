@@ -195,6 +195,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //SQL実行ログ
+        App\Providers\DatabaseQueryServiceProvider::class,
+
     ],
 
     /*

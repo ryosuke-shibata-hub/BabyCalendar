@@ -160,6 +160,9 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+            'test.*.name' => [
+                'required' => 'こここ',
+            ]
         ],
     ],
 
@@ -174,6 +177,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'test.*.name' => 'こここ',
+    ],
 
 ];
