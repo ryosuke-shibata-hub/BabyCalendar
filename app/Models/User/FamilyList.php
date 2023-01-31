@@ -32,5 +32,14 @@ class FamilyList extends Model
 
     }
 
+    public static function select($value)
+    {
+        // dd($value);
+        return self::whereIn('id',$value)
+            ->get();
+
+
+    }
+
 
 }

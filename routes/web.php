@@ -15,9 +15,20 @@ use App\Http\Controllers\TestController;
 |
 */
 
+Route::prefix('FirstBaby')->group(function () {
+
+    Route::middleware('auth')->group(function() {
+        Route::get('/test',[TestController::class,'index'])->name('index');
+        Route::post('/test/post',[TestController::class,'create'])->name('create');
+        Route::post('/test/test', [TestController::class,'test'])->name('create_test');
+
+    });
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,8 +36,8 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/test',[TestController::class,'index'])->name('index');
-    Route::post('/test/post',[TestController::class,'create'])->name('create');
+    // Route::get('/test',[TestController::class,'index'])->name('index');
+    // Route::post('/test/post',[TestController::class,'create'])->name('create');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
