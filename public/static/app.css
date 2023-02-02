@@ -1,0 +1,25 @@
+.main {
+    font-family: "Nico Moji";
+}
+.nikukyu-font {
+  font-family: "Nikukyu";
+}
+.formInput {
+    font-family: "fantasy";
+}
+.column {
+  height: 80vh;
+  /* width: 50%; */
+}
+.left {
+  background: url(/image/22693635.jpg) no-repeat top center;
+  margin-top: 7%;
+}
+.left-login {
+  background: url(/image/2382857.jpg) no-repeat top center;
+  margin-top: 7%;
+}
+
+.right {
+
+}

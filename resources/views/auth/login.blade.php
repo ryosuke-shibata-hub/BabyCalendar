@@ -1,47 +1,50 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@extends('guest.layouts')
+@section('title', 'FirstBaby-ログイン-')
+{{-- @include('common.header') --}}
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-7 column left-login">
+            <div class="" style="margin-top: -10%;">
+                <h2 class="font-bold text-center text-pink-300 nikukyu-font display-3">
+                    ログイン
+                </h2>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
+        <div class=" col-md-5 column right">
+            <div class="py-20"></div>
+            @if(session('errmessage'))
+                <h4 class="text-danger">
+                    {{ session('errmessage') }}
+                </h4>
+                <div class="divider-form"></div>
             @endif
+            <form action="/FirstBaby/login/process" method="POST" class="w-full max-w-sm">
+                @csrf
+                <div class="flex items-center py-2 border-b border-pink-300">
+                    <div class="">
+                        <label class="">ログインID</label>
+                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="ログインID" aria-label="Full name" name="loginId">
+                        <label class="">パスワード</label>
+                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="password" placeholder="パスワード" aria-label="Full name" name="password">
+                        <button class="flex-shrink-0 px-2 py-1 mt-5 text-sm text-white bg-pink-500 border-4 border-pink-500 rounded hover:bg-pink-700 hover:border-pink-700" type="submit">
+                        ログイン
+                        </button>
+                        <a href="/FirstBaby/top" class="flex-shrink-0 px-2 py-1 text-sm text-pink-500 border-4 border-transparent rounded hover:text-pink-800">
+                        キャンセル
+                        </a>
+                    </div>
 
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+
+                </div>
+                </form>
         </div>
-    </form>
-</x-guest-layout>
+    </div>
+    <footer>
+        <div class="mb-10 text-center">
+            <span class="font-bold">&copy; 2023 first-baby.</span>
+        </div>
+    </footer>
+</div>
+@endsection
+{{-- @include('common.footer') --}}

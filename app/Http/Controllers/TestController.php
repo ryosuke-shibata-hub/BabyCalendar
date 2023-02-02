@@ -8,12 +8,14 @@ use DB;
 use Log;
 
 use App\Models\User\FamilyList;
-
+use App\Models\User;
+use App\Models\UserCopy;
+use App\Models\FamiliListCopy;
 class TestController extends Controller
 {
     public function index()
     {
-        return view('test');
+        return view('Family.test');
     }
 
 
@@ -48,4 +50,5 @@ class TestController extends Controller
 
         dd($list);
     }
+
 }
