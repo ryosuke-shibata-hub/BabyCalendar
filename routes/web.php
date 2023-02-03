@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Guest\TopController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::prefix('FirstBaby')->group(function () {
         Route::get('/top', [TopController::class, 'top'])->name('guest_top');//アプリのトップページ
         Route::get('/login', [LoginController::class, 'login'])->name('login');//ログイン画面
         Route::post('/login/process', [LoginController::class, 'loginProcess'])->name('loginProcess');//ログイン処理
+        Route::get('/register', [RegisterController::class, 'create'])->name('registerCreate');//新規登録画面
+        Route::post('/register/process', [RegisterController::class, 'store'])->name('registerStore');//アカウント登録処理
     });
 
     Route::middleware('auth')->group(function() {

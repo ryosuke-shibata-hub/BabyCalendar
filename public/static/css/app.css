@@ -1,11 +1,14 @@
 .main {
-    font-family: "Nico Moji";
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 100;
+    color: slategrey;
 }
 .nikukyu-font {
   font-family: "Nikukyu";
 }
 .formInput {
-    font-family: "fantasy";
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 100;
 }
 .column {
   height: 80vh;
@@ -19,7 +22,7 @@
   background: url(/image/2382857.jpg) no-repeat top center;
   margin-top: 7%;
 }
-
-.right {
-
+.left-register {
+  background: url(/image/2382864.jpg) no-repeat top center;
+  margin-top: 7%;
 }
