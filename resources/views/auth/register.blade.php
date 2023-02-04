@@ -19,21 +19,22 @@
                 </h4>
                 <div class="divider-form"></div>
             @endif
-            <form action="/FirstBaby/register/process" method="POST" class="w-full max-w-sm">
-            @csrf
+            {{-- <form action="/FirstBaby/register/process" method="POST" class="w-full max-w-sm">
+            @csrf --}}
+            <div class="w-full max-w-sm" id="registerForm">
                 <div class="flex items-center py-2 border-b border-pink-300">
                     <div class="">
                         <label class="">ログインID</label>
-                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="ログインID" aria-label="Full name" name="loginId">
+                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="ログインID" aria-label="Full name" name="loginId" required>
                         <label class="">メールアドレス</label>
-                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="mail" placeholder="メールアドレス" aria-label="Full name" name="email">
+                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="mail" placeholder="メールアドレス" aria-label="Full name" name="email" required>
                         <label class="">アカウント名</label>
-                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="アカウント名" aria-label="Full name" name="accountName">
+                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="アカウント名" aria-label="Full name" name="accountName" required>
                         <label class="">パスワード</label>
-                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="password" placeholder="パスワード" aria-label="Full name" name="password">
+                        <input class="text-gray-700 border rounded form-control focus:outline-none" type="password" placeholder="パスワード" aria-label="Full name" name="password" data-toggle="password" required>
                         <label class="">確認用パスワード</label>
-                        <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="password" placeholder="確認用パスワード" aria-label="Full name" name="confirmPassword">
-                        <button class="flex-shrink-0 px-2 py-1 mt-5 text-sm text-white bg-pink-500 border-4 border-pink-500 rounded hover:bg-pink-700 hover:border-pink-700" type="button" data-toggle="modal" data-target="#registerModal">
+                        <input class="text-gray-700 border rounded form-control focus:outline-none" type="password" placeholder="確認用パスワード" aria-label="Full name" name="confirmPassword" data-toggle="password" required>
+                        <button class="flex-shrink-0 px-2 py-1 mt-5 text-sm text-white bg-pink-500 border-4 border-pink-500 rounded confirmButton hover:bg-pink-700 hover:border-pink-700 form-btn" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" id="confirmButton">
                         アカウントを作成
                         </button>
                         <a href="/FirstBaby/top" class="flex-shrink-0 px-2 py-1 text-sm text-pink-500 border-4 border-transparent rounded hover:text-pink-800">
@@ -41,9 +42,12 @@
                         </a>
                     </div>
                 </div>
-            </form>
+            {{-- </form> --}}
+            </div>
         </div>
     </div>
+    <!-- モーダル画面 -->
+    @include('modals.register_confirm')
     <footer>
         <div class="mb-10 text-center">
             <span class="font-bold">&copy; 2023 first-baby.</span>

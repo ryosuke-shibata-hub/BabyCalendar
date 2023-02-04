@@ -26,3 +26,13 @@
   background: url(/image/2382864.jpg) no-repeat top center;
   margin-top: 7%;
 }
+.confirmButton[disabled] {
+    background-color: #aaa;
+    border-color: #aaa;
+    cursor: not-allowed;
+}
+.confirmButton[disabled]:hover {
+    background-color: #aaa;
+    border-color: #aaa;
+    cursor: not-allowed;
+}
