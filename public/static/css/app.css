@@ -36,3 +36,11 @@
     border-color: #aaa;
     cursor: not-allowed;
 }
+footer {
+  position: absolute;
+  bottom: 0;
+
+  width: 95%;
+  height: 60px;
+  /* background-color: #312d2a; */
+}

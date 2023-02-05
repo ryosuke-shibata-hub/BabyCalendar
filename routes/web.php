@@ -25,6 +25,7 @@ Route::prefix('FirstBaby')->group(function () {
         Route::post('/login/process', [LoginController::class, 'loginProcess'])->name('loginProcess');//ログイン処理
         Route::get('/register', [RegisterController::class, 'create'])->name('registerCreate');//新規登録画面
         Route::post('/register/process', [RegisterController::class, 'store'])->name('registerStore');//アカウント登録処理
+        Route::get('/register/confirm', [RegisterController::class, 'confirm'])->name('registerConfirm');//登録完了画面
     });
 
     Route::middleware('auth')->group(function() {

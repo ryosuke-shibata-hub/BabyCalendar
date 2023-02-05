@@ -40,6 +40,8 @@
                             <div class="col-sm-12">
                                 <p class="">パスワード：※セキュリティ保護のため非表示にしています</p>
                             </div>
+                            <input class="modal-password" type="hidden" name="password" value="">
+                            <input class="modal-password-confirm" type="hidden" name="passwordConfirm" value="">
                         </div>
                         <div class="py-2 text-center">
                             <button type="submit" class="flex-shrink-0 px-2 py-1 mt-5 text-sm text-white bg-pink-500 border-4 border-pink-500 rounded hover:bg-pink-700 hover:border-pink-700">

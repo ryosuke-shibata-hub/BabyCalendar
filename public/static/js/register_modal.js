@@ -19,10 +19,10 @@ $(function () {
 
 $('.form-btn').click(function () {
     const name = $('input[name="loginId"]').val();
-    console.log(name);
     const email = $('input[name="email"]').val();
     const accountName = $('input[name="accountName"]').val();
     const password = $('input[name="password"]').val();
+    const confirmPassword = $('input[name="confirmPassword"]').val();
 
     $('.form-btn').attr('data-bs-toggle', 'modal');
     $('.form-btn').attr('data-bs-target', '#registerModal');
@@ -31,6 +31,7 @@ $('.form-btn').click(function () {
     $('.modal-email').text(email).val(email);
     $('.modal-accountName').text(accountName).val(accountName);
     $('.modal-password').text(password).val(password);
+    $('.modal-password-confirm').text(confirmPassword).val(confirmPassword);
 
     $(function() {
         $('.toggle-pass').on('click', function() {
