@@ -1,4 +1,4 @@
-@extends('guest.layouts')
+@extends('MainContent.layouts')
 @section('title', 'FirstBaby-ログイン-')
 {{-- @include('common.header') --}}
 @section('content')
@@ -30,7 +30,7 @@
                         <button class="flex-shrink-0 px-2 py-1 mt-5 text-sm text-white bg-pink-500 border-4 border-pink-500 rounded hover:bg-pink-700 hover:border-pink-700" type="submit">
                         ログイン
                         </button>
-                        <a href="/FirstBaby/top" class="flex-shrink-0 px-2 py-1 text-sm text-pink-500 border-4 border-transparent rounded hover:text-pink-800">
+                        <a href="/FirstBaby/welcome" class="flex-shrink-0 px-2 py-1 text-sm text-pink-500 border-4 border-transparent rounded hover:text-pink-800">
                         キャンセル
                         </a>
                     </div>
@@ -40,11 +40,6 @@
                 </form>
         </div>
     </div>
-    <footer>
-        <div class="mb-10 text-center">
-            <span class="font-bold">&copy; 2023 first-baby.</span>
-        </div>
-    </footer>
 </div>
 @endsection
-{{-- @include('common.footer') --}}
+@include('Common.Guest.footer')

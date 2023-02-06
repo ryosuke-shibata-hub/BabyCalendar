@@ -3,10 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\Guest\TopController;
+use App\Http\Controllers\Guest\WelcomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\MainContent\TopController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +17,14 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return redirect('FirstBaby/welcome');
+});
 
 Route::prefix('FirstBaby')->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('/top', [TopController::class, 'top'])->name('guest_top');//アプリのトップページ
+        Route::get('/welcome', [WelcomeController::class, 'welcome'])->name('welcome');//アプリのウェルカムページ
+        Route::get('/top', [TopController::class, 'top'])->name('top');
         Route::get('/login', [LoginController::class, 'login'])->name('login');//ログイン画面
         Route::post('/login/process', [LoginController::class, 'loginProcess'])->name('loginProcess');//ログイン処理
         Route::get('/register', [RegisterController::class, 'create'])->name('registerCreate');//新規登録画面
@@ -36,9 +40,7 @@ Route::prefix('FirstBaby')->group(function () {
     });
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

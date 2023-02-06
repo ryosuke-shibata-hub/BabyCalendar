@@ -1,4 +1,4 @@
-@extends('guest.layouts')
+@extends('MainContent.layouts')
 @section('title', 'FirstBaby')
 {{-- @include('common.header') --}}
 @section('content')
@@ -23,11 +23,10 @@
             </div>
             <div class="py-10 border-4 border-blue-100 rounded bg-blue-50">
                 <p class="pb-5 display-6">ゲストとしてログイン</p>
-                <a href="#" class="px-4 py-2 font-bold text-white bg-blue-300 border-b-4 border-blue-500 rounded hover:bg-blue-200 hover:border-blue-300">トップページへ</a>
+                <a href="/FirstBaby/top" class="px-4 py-2 font-bold text-white bg-blue-300 border-b-4 border-blue-500 rounded hover:bg-blue-200 hover:border-blue-300">トップページへ</a>
             </div>
         </div>
     </div>
-    @include('Common.Guest.footer')
 </div>
 @endsection
-{{-- @include('common.footer') --}}
+@include('Common.Guest.footer')

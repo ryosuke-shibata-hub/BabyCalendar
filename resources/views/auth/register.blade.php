@@ -1,4 +1,4 @@
-@extends('guest.layouts')
+@extends('MainContent.layouts')
 @section('title', 'FirstBaby-新規登録-')
 {{-- @include('common.header') --}}
 @section('content')
@@ -67,7 +67,7 @@
                         <button class="flex-shrink-0 px-2 py-1 text-white bg-pink-500 border-4 border-pink-500 rounded confirmButton hover:bg-pink-700 hover:border-pink-700 form-btn" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" id="confirmButton">
                         アカウントを作成
                         </button>
-                        <a href="/FirstBaby/top" class="flex-shrink-0 px-2 py-1 text-pink-500 border-4 border-transparent rounded hover:text-pink-800">
+                        <a href="/FirstBaby/welcome" class="flex-shrink-0 px-2 py-1 text-pink-500 border-4 border-transparent rounded hover:text-pink-800">
                         キャンセル
                         </a>
                     </div>
@@ -78,7 +78,6 @@
     </div>
     <!-- モーダル画面 -->
     @include('modals.register_confirm')
-    @include('Common.Guest.footer')
 </div>
 @endsection
-{{-- @include('common.footer') --}}
+@include('Common.Guest.footer')

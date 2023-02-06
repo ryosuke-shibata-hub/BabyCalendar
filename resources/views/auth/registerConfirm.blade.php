@@ -1,4 +1,4 @@
-@extends('guest.layouts')
+@extends('MainContent.layouts')
 @section('title', 'FirstBaby-館員登録が完了しました-')
 @section('content')
 <div class="container">
@@ -29,6 +29,6 @@
             @endif
         </div>
     </div>
-    @include('Common.Guest.footer')
 </div>
 @endsection
+@include('Common.Guest.footer')
