@@ -33,7 +33,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null) {
         if(Auth::guard($guard)->check()) {
             if(Auth::check()) {
-                return redirect('/FirstBaby/test');
+                return redirect('/FirstBaby/top');
             } else {
                 return redirect('/FirstBaby/welcome');
             }

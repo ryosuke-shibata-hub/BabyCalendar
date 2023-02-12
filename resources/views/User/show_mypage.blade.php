@@ -1,5 +1,5 @@
 @extends('MainContent.layouts')
-@section('title', 'FirstBaby-トップ-')
+@section('title', 'FirstBaby-トップマイページ-')
 @include('common.header')
 @section('content')
 <div class="container">

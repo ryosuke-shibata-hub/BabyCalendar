@@ -1,3 +1,9 @@
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1920px !important;
+    }
+}
+
 .main {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 100;
