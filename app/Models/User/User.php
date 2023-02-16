@@ -53,4 +53,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function MyContent($id)
+    {
+        return self::select(
+            'logo',
+            'background_logo',
+            'account_name',
+            'comment',
+        )
+        ->where('account_uuid',$id)
+        ->first();
+    }
 }
