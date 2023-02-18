@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use DB;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -40,7 +40,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'id',
-        'uuid',
+        'account_uuid',
         'password',
         'remember_token',
     ];
@@ -57,12 +57,35 @@ class User extends Authenticatable
     public static function MyContent($id)
     {
         return self::select(
+            'id',
             'logo',
             'background_logo',
             'account_name',
             'comment',
+            'account_uuid',
         )
         ->where('account_uuid',$id)
         ->first();
+    }
+
+    public static function checkUniqueAccountName($accountName,$accountUuid)
+    {
+        return self::select(
+            'account_name',
+        )
+        ->where('account_name', $accountName)
+        ->where('account_uuid','!=',$accountUuid)
+        ->first();
+    }
+
+    public static function updateProfile($request,$authUuid)
+    {
+        $data =  User::where('account_uuid',$authUuid)->first();
+        $data->account_name = $request->accountName;
+        $data->comment = $request->myComment;
+        $data->update_date = now();
+        $data->save();
+
+        return $data;
     }
 }

@@ -30,29 +30,35 @@
         </div>
     </div>
   </div>
-  <div class="pl-2 row">
-    <div class="col-sm-3">
-        <a href="#" type="button" class="px-24 py-3 mb-2 mr-2 text-xl font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+  <div class="row">
+    <div class="col-md">
+        <a href="#" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
             通知
             <i class="fa-regular fa-bell"></i>
         </a>
     </div>
-    <div class="col-sm-3">
-        <a href="#" type="button" class="px-24 py-3 mb-2 mr-2 text-xl font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+    <div class="col-md">
+        <a href="#" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
             写真
             <i class="fa-regular fa-image"></i>
         </a>
     </div>
-    <div class="col-sm-3">
-        <a href="#" type="button" class="px-24 py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+    <div class="col-md">
+        <a href="#" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
             ファミリー
             <i class="fa-solid fa-house-chimney-window"></i>
         </a>
     </div>
-    <div class="col-sm-3">
-        <a href="#" type="button" class="px-24 py-3 mb-2 mr-2 text-xl font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+    <div class="col-md">
+        <a href="/FirstBaby/edit/profile/{{ $userInformation->account_uuid }}" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+            プロフィール
+            <i class="fa-regular fa-user"></i>
+        </a>
+    </div>
+    <div class="col-md">
+        <a href="#" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
             友達
-            <i class="fa-solid fa-user-group"></i>
+            <i class="fa-regular fa-handshake"></i>
         </a>
     </div>
   </div>

@@ -13,15 +13,12 @@
         </div>
         <div class=" col-md-6 column right">
             <div class="py-20"></div>
-            {{-- <form action="/FirstBaby/register/process" method="POST" class="w-full max-w-sm">
-            @csrf --}}
             <div class="w-full" id="registerForm">
                 <div class="items-center py-2">
                     <!--バリーデーションメッセージ-->
                     <table class="table border-pink-300">
                     <tbody class="text-sm">
                         <tr>
-
                             <td class="align-middle">ログインID</td>
                             <td>
                                 <span class="text-pink-300">※サイト内で利用するIDになります。</span>
@@ -72,7 +69,6 @@
                         </a>
                     </div>
                 </div>
-            {{-- </form> --}}
             </div>
         </div>
     </div>
