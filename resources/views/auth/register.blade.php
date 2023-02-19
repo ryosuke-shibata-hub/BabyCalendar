@@ -23,7 +23,7 @@
                             <td>
                                 <span class="text-pink-300">※サイト内で利用するIDになります。</span>
                                 <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="半角英数字記号(-_)で8文字以上16文字以内で入力してください" aria-label="Full name" name="loginId" value="{{ old('loginId') }}" required>
-                                @include('Error.Form.loginId')
+                                @include('Message.Error.Form.loginId')
                             </td>
                         </tr>
                         <tr>
@@ -31,7 +31,7 @@
                             <td>
                                 <span class="text-pink-300">※有効なメールアドレスを入力してください。</span>
                                 <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="mail" placeholder="メールアドレス" aria-label="Full name" name="email" value="{{ old('email') }}" required>
-                                @include('Error.Form.email')
+                                @include('Message.Error.Form.email')
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +39,7 @@
                             <td>
                                 <span class="text-pink-300">※サイト内で利用するユーザー名になります。</span>
                                 <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border rounded appearance-none formInput focus:outline-none" type="text" placeholder="最大16文字以内で入力してください" aria-label="Full name" name="accountName" value="{{ old('accountName') }}" required>
-                                @include('Error.Form.accountName')
+                                @include('Message.Error.Form.accountName')
                             </td>
                         </tr>
                         <tr>
@@ -47,7 +47,7 @@
                             <td>
                                 <span class="text-pink-300">※半角英数記号(大文字小文字)をそれぞれ一つ以上含み8文字以上で入力してください</span>
                                 <input class="text-gray-700 border rounded form-control focus:outline-none" type="password" placeholder="パスワード" aria-label="Full name" name="password" data-toggle="password" required>
-                                @include('Error.Form.password')
+                                @include('Message.Error.Form.password')
                             </td>
                         </tr>
                         <tr>
@@ -55,7 +55,7 @@
                             <td>
                                 <span class="text-pink-300">※半角英数記号(大文字小文字)をそれぞれ一つ以上含み8文字以上で入力してください</span>
                                 <input class="text-gray-700 border rounded form-control focus:outline-none" type="password" placeholder="確認用パスワード" aria-label="Full name" name="confirmPassword" data-toggle="password" required>
-                                @include('Error.Form.passwordConfirm')
+                                @include('Message.Error.Form.passwordConfirm')
                             </td>
                         </tr>
                     </tbody>

@@ -18,17 +18,23 @@ class MyPageController extends Controller
     {
         $id = $request->id;
         $userInformation = User::MyContent($id);
+        $defaltBackgroundImg = "/image/defaultBackground.jpeg";
+        $defaltLogoImg = "/image/defaultLogo.jpg";
 
         return view('User.show_mypage')
         ->with('id',$id)
-        ->with('userInformation', $userInformation);
+        ->with('userInformation', $userInformation)
+        ->with('defaltBackgroundImg', $defaltBackgroundImg)
+        ->with('defaltLogoImg',$defaltLogoImg);
     }
 
     public function editProfile($id)
     {
         $userInformation = User::MyContent($id);
+
         return view('User.editProfile')
         ->with('userInformation', $userInformation);
+
     }
 
     public function updateProfile(Request $request)
@@ -36,16 +42,21 @@ class MyPageController extends Controller
         $validator = Validator::make($request->all(), [
             'accountName' => ['bail','required','string','max:16'],
             'myComment' => ['bail','string','max:200',],
+            'myLogo' => ['bail','image','max:5000'],
+            'myBackgroundLogo' => ['bail','image','max:5000'],
         ]);
         if ($validator->fails()) {
             return redirect('/FirstBaby/edit/profile/'.$request->accountUuid)
             ->withErrors($validator)
             ->withInput();
         }
+
         $accountUuid = $request->accountUuid;
         $authUuid = Auth::user()->account_uuid;
         $accountName = $request->accountName;
         $checkUnique = User::checkUniqueAccountName($accountName,$accountUuid);
+        $myLogo = $request->file('myLogo');
+        $myBackgroundLogo = $request->file('myBackgroundLogo');
 
         if (!empty($checkUnique)) {
             return redirect('/FirstBaby/edit/profile/'.$request->accountUuid)
@@ -59,7 +70,18 @@ class MyPageController extends Controller
 
             DB::beginTransaction();
 
-            User::updateProfile($request,$authUuid);
+            if ($myLogo) {
+                $myLogoPath = '/'.$myLogo->store('/public/image/Profile/Logo','public');
+            } else {
+                $myLogoPath = Auth::user()->logo;
+            }
+            if ($myBackgroundLogo) {
+                $myBackgroundLogoPath = '/'.$myBackgroundLogo->store('/public/image/Profile/Logo','public');
+            } else {
+                $myBackgroundLogoPath = Auth::user()->background_logo;
+            }
+
+            User::updateProfile($request,$authUuid,$myLogoPath,$myBackgroundLogoPath);
 
             DB::commit();
 

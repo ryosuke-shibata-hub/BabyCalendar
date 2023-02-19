@@ -5,10 +5,21 @@
 <div class="container text-center w-75">
   <div class="mb-3 border-2 border-pink-100 rounded-md">
     <div class="">
-        <img class="w-36 d-inline-block" src="{{ asset($userInformation->background_logo) }}">
+        @if($userInformation->background_logo == $defaltBackgroundImg)
+        <img class="h-50 w-100 d-inline-block" src="{{ asset($userInformation->background_logo) }}">
+        @else
+        <img class="h-50 w-100 d-inline-block"
+            src="{{ Storage::url($userInformation->background_logo) }}">
+        @endif
     </div>
-    <div class="ml-10 -mt-10">
-        <img class="w-20 h-20 p-1 rounded-full ring-2 ring-gray-200" src="{{ asset($userInformation->logo) }}">
+    <div class="ml-10 -mt-20">
+        @if($userInformation->logo == $defaltLogoImg)
+            <img class="w-40 h-40 p-1 rounded-full ring-2 ring-gray-200"
+            src="{{ asset($userInformation->logo) }}">
+        @else
+            <img class="w-40 h-40 p-1 rounded-full ring-2 ring-gray-200"
+            src="{{ Storage::url($userInformation->logo) }}">
+        @endif
     </div>
     <div class="px-16 py-3">
         <div class="row">

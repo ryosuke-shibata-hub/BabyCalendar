@@ -50,3 +50,7 @@ footer {
   height: 60px;
   /* background-color: #312d2a; */
 }
+
+.hidden-file {
+    display: none;
+}

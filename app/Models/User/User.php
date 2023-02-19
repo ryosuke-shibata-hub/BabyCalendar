@@ -78,11 +78,13 @@ class User extends Authenticatable
         ->first();
     }
 
-    public static function updateProfile($request,$authUuid)
+    public static function updateProfile($request,$authUuid,$myLogoPath,$myBackgroundLogoPath)
     {
         $data =  User::where('account_uuid',$authUuid)->first();
         $data->account_name = $request->accountName;
         $data->comment = $request->myComment;
+        $data->logo = $myLogoPath;
+        $data->background_logo = $myBackgroundLogoPath;
         $data->update_date = now();
         $data->save();
 
