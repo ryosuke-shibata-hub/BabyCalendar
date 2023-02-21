@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="my-auto font-bold text-center col-sm-1">
-                <a href="/FirstBaby/mypage/{{ Auth::user()->account_uuid }}" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
+                <a href="/FirstBaby/mypage/{{ Auth::user()->login_id }}" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
                     マイページ
                 </a>
             </div>

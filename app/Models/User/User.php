@@ -54,7 +54,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function MyContent($id)
+    public static function UserMypage($login_id)
     {
         return self::select(
             'id',
@@ -63,8 +63,26 @@ class User extends Authenticatable
             'account_name',
             'comment',
             'account_uuid',
+            'login_id',
         )
-        ->where('account_uuid',$id)
+        ->where('login_id',$login_id)
+        ->where('delete_flg',0)
+        ->first();
+    }
+
+    public static function UserEditProfile($account_uuid)
+    {
+        return self::select(
+            'id',
+            'logo',
+            'background_logo',
+            'account_name',
+            'comment',
+            'account_uuid',
+            'login_id',
+        )
+        ->where('account_uuid',$account_uuid)
+        ->where('delete_flg',0)
         ->first();
     }
 
@@ -75,6 +93,7 @@ class User extends Authenticatable
         )
         ->where('account_name', $accountName)
         ->where('account_uuid','!=',$accountUuid)
+        ->where('delete_flg',0)
         ->first();
     }
 

@@ -36,8 +36,10 @@ Route::prefix('FirstBaby')->group(function () {
     Route::middleware('auth')->group(function() {
         Route::post('/logout',[LoginController::class, 'logout'])->name('logout');//ログアウト処理
         Route::get('/mypage/{id}',[MyPageController::class, 'showMypage'])->name('showMypage');//マイページトップ
-        Route::get('/edit/profile/{id}',[MyPageController::class, 'editProfile'])->name('editProfile');//プロフィール編集
+        Route::get('/edit/profile',[MyPageController::class, 'editProfile'])->name('editProfile');//プ ロフィール編集
         Route::post('/edit/profile/update',[MyPageController::class, 'updateProfile'])->name('updateProfile');//プロフィール編集処理
+        Route::get('/edit/account',[MyPageController::class, 'editProfile'])->name('editAccount');//アカウント編集
+        Route::post('/edit/profile/update/account',[MyPageController::class, 'updateAccount'])->name('updateAccount');//プロフィール編集処理(仮でアカウント削除)
         Route::get('/test',[TestController::class,'index'])->name('index');
         Route::post('/test/post',[TestController::class,'create'])->name('create');
         Route::post('/test/test', [TestController::class,'test'])->name('create_test');

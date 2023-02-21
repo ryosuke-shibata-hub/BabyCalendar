@@ -16,26 +16,36 @@ class MyPageController extends Controller
 {
     public function showMypage(Request $request)
     {
-        $id = $request->id;
-        $userInformation = User::MyContent($id);
+
+        $login_id = $request->id;
+        $userInformation = User::UserMypage($login_id);
         $defaltBackgroundImg = "/image/defaultBackground.jpeg";
         $defaltLogoImg = "/image/defaultLogo.jpg";
 
         return view('User.show_mypage')
-        ->with('id',$id)
+        ->with('id',$login_id)
         ->with('userInformation', $userInformation)
         ->with('defaltBackgroundImg', $defaltBackgroundImg)
         ->with('defaltLogoImg',$defaltLogoImg);
     }
 
-    public function editProfile($id)
+    public function editProfile(Request $request)
     {
-        $userInformation = User::MyContent($id);
+        $account_uuid = Auth::user()->account_uuid;
+        $userInformation = User::UserEditProfile($account_uuid);
 
         return view('User.editProfile')
         ->with('userInformation', $userInformation);
-
     }
+
+    // public function editAccount(Request $request)
+    // {
+    //     $account_uuid = Auth::user()->account_uuid;
+    //     $userInformation = User::UserEditProfile($account_uuid);
+
+    //     return view('User.editProfile')
+    //     ->with('userInformation', $userInformation);
+    // }
 
     public function updateProfile(Request $request)
     {
@@ -46,7 +56,7 @@ class MyPageController extends Controller
             'myBackgroundLogo' => ['bail','image','max:5000'],
         ]);
         if ($validator->fails()) {
-            return redirect('/FirstBaby/edit/profile/'.$request->accountUuid)
+            return redirect('/FirstBaby/edit/profile')
             ->withErrors($validator)
             ->withInput();
         }
@@ -59,7 +69,7 @@ class MyPageController extends Controller
         $myBackgroundLogo = $request->file('myBackgroundLogo');
 
         if (!empty($checkUnique)) {
-            return redirect('/FirstBaby/edit/profile/'.$request->accountUuid)
+            return redirect('/FirstBaby/edit/profile')
             ->with('err_message','入力されたアカウントネームは既に存在します。別のアカウントネームを入力してください。');
         }
         if ($accountUuid !== $authUuid) {
@@ -85,13 +95,15 @@ class MyPageController extends Controller
 
             DB::commit();
 
-            return redirect('/FirstBaby/edit/profile/'.$request->accountUuid)
+            return redirect('/FirstBaby/edit/profile')
             ->with('succsess_msg',"アカウント情報の更新が完了しました。");
 
         } catch (\Throwable $th) {
             Log::error("アカウント更新で例外処理発生",['アカウントUUID',$accountUuid,$th]);
-            return redirect('/FirstBaby/edit/profile/'.$request->accountUuid)
+            return redirect('/FirstBaby/edit/profile')
             ->with('err_message','更新処理に失敗しました。更新操作を再度お試しください');
         }
     }
+
+
 }
