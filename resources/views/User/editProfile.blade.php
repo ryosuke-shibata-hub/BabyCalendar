@@ -15,14 +15,31 @@
                     アカウント設定
                 </a>
             </div>
-            <div class="py-3 font-bold">メールアドレスと通知</div>
-            <div class="py-3 font-bold">パスワード</div>
+            <div class="py-1 font-bold">
+                <a href="/FirstBaby/edit/email" type="button" class="py-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+                    メールアドレスと通知
+                </a>
+            </div>
+            <div class="py-1 font-bold">
+                <a href="/FirstBaby/edit/password" type="button" class="py-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+                    パスワード変更
+                </a>
+            </div>
+            <div class="py-1 font-bold">
+                <a href="/FirstBaby/mypage/{{ $userInformation->login_id }}" type="button" class="py-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+                    戻る
+                </a>
+            </div>
         </div>
         <div class="col-md-9">
             @if(Request::routeIs('editProfile'))
                 @include('User.Edit.editPublicProfile')
             @elseif(Request::routeIs('editAccount'))
                 @include('User.Edit.editAccount')
+            @elseif(Request::routeIs('editEmail'))
+                @include('User.Edit.editEmail')
+            @elseif(Request::routeIs('editPassword'))
+                @include('User.Edit.editPassword')
             @endif
         </div>
     </div>

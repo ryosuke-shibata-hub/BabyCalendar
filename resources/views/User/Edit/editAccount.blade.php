@@ -1,6 +1,6 @@
 <div class="">
     <div class="text-center">
-        <h2 class="font-bold">-公開用プロフィール-</h2>
+        <h2 class="font-bold">-アカウント設定-</h2>
     </div>
     <div class="">
         @include('Message.Error.validate')

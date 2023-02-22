@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 Route::prefix('FirstBaby')->group(function () {
     Route::get('/top', [TopController::class, 'top'])->name('top');//アプリのトップページ
+    Route::get('/delete/account/confirm', [TopController::class, 'accountDeleteSuccsess'])->name('accountDeleteSuccsess');//アカウント削除成功時の画面
     Route::middleware('guest')->group(function () {
         Route::get('/welcome', [WelcomeController::class, 'welcome'])->name('welcome');//アプリのウェルカムページ
         Route::get('/login', [LoginController::class, 'login'])->name('login');//ログイン画面
@@ -39,7 +40,11 @@ Route::prefix('FirstBaby')->group(function () {
         Route::get('/edit/profile',[MyPageController::class, 'editProfile'])->name('editProfile');//プ ロフィール編集
         Route::post('/edit/profile/update',[MyPageController::class, 'updateProfile'])->name('updateProfile');//プロフィール編集処理
         Route::get('/edit/account',[MyPageController::class, 'editProfile'])->name('editAccount');//アカウント編集
-        Route::post('/edit/profile/update/account',[MyPageController::class, 'updateAccount'])->name('updateAccount');//プロフィール編集処理(仮でアカウント削除)
+        Route::post('/edit/profile/update/account',[MyPageController::class, 'updateAccount'])->name('updateAccount');//登録Eメールの編集
+        Route::get('/edit/email',[MyPageController::class, 'editProfile'])->name('editEmail');//アカウント編集
+        Route::post('/edit/profile/update/email',[MyPageController::class, 'updateEmail'])->name('updateEmail');//登録Eメールの編集処理
+        Route::get('/edit/password',[MyPageController::class, 'editProfile'])->name('editPassword');//パスワード編集
+        Route::post('/edit/profile/update/password',[MyPageController::class, 'updatePassword'])->name('updatePassword');//パスワードの編集処理
         Route::get('/test',[TestController::class,'index'])->name('index');
         Route::post('/test/post',[TestController::class,'create'])->name('create');
         Route::post('/test/test', [TestController::class,'test'])->name('create_test');

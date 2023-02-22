@@ -11,4 +11,9 @@ class TopController extends Controller
     {
         return view('MainContent.top');
     }
+
+    public function accountDeleteSuccsess()
+    {
+        return view('guest.account_delete_succsess');
+    }
 }

@@ -24,8 +24,9 @@ return new class extends Migration
             $table->text('comment')->nullable(true)->comment('ひとことコメント');
             $table->timestamp('email_verified_at')->nullable(true);
             $table->string('password')->nullable(false)->comment('パスワード');
-            $table->integer('delete_flg')->unsigned()->nullable(false)->comment('削除フラグ');
+            $table->integer('use_notification_flg')->unsigned()->nullable(false)->comment('通知フラグ');
             $table->integer('user_roll')->unsigned()->nullable(false)->comment('アカウントロール');
+            $table->integer('delete_flg')->unsigned()->nullable(false)->comment('削除フラグ');
             $table->rememberToken()->nullable(true);
             $table->timestamp('create_date')->nullable(false)->comment('アカウント作成日時');
             $table->timestamp('update_date')->nullable(false)->comment('アカウント更新日時');
