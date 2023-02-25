@@ -49,7 +49,7 @@
         </a>
     </div>
     <div class="col-md">
-        <a href="#" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
+        <a href="/FirstBaby/show/image" type="button" class="py-3 mb-2 mr-2 font-bold text-center text-gray-500 border-2 border-pink-200 rounded-lg w-100 hover:text-white hover:bg-pink-200 focus:ring-4 focus:outline-none focus:ring-pink-300">
             写真
             <i class="fa-regular fa-image"></i>
         </a>

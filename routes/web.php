@@ -8,6 +8,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MainContent\TopController;
 use App\Http\Controllers\User\MyPageController;
+use App\Http\Controllers\User\ShowImageController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +48,8 @@ Route::prefix('FirstBaby')->group(function () {
         Route::post('/edit/profile/update/email',[MyPageController::class, 'updateEmail'])->name('updateEmail');//登録Eメールの編集処理
         Route::get('/edit/password',[MyPageController::class, 'editProfile'])->name('editPassword');//パスワード編集
         Route::post('/edit/profile/update/password',[MyPageController::class, 'updatePassword'])->name('updatePassword');//パスワードの編集処理
+        Route::get('/show/image', [ShowImageController::class, 'showImages'])->name('showImages');//写真の一覧
+        Route::post('/upload/image', [ShowImageController::class, 'uploadImages'])->name('uploadImages');//写真のアップロード
         Route::get('/test',[TestController::class,'index'])->name('index');
         Route::post('/test/post',[TestController::class,'create'])->name('create');
         Route::post('/test/test', [TestController::class,'test'])->name('create_test');

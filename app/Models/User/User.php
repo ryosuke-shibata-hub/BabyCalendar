@@ -158,4 +158,18 @@ class User extends Authenticatable
 
         return $data;
     }
+
+    public static function getImageLists($userId)
+    {
+        return self::select(
+            'images.image_path as image',
+            'images.create_date as createDate',
+            'users.login_id as loginId',
+            'users.account_uuid as uuid',
+        )
+        ->leftJoin('images', 'users.account_uuid', 'images.account_uuid')
+        ->where('users.delete_flg', '=', 0)
+        ->where('images.delete_flg', '=', 0)
+        ->get();
+    }
 }

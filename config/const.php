@@ -17,4 +17,15 @@ return [
             'GeneralUser' => 10,
         ]
     ],
+    'Images' => [
+        'BackGroundImg' => [
+            'Dir' => 'myBackgroundLogo',
+            'Path' => '/public/image/Profile/Logo',
+        ],
+        'Logo' => [
+            'Dir' => 'Logo',
+            'Path' => '/public/image/Profile/BackgroundLogo',
+        ],
+        'MyImg' => 'MyImg',
+    ]
 ];

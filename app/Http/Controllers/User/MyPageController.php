@@ -73,12 +73,12 @@ class MyPageController extends Controller
             DB::beginTransaction();
 
             if ($myLogo) {
-                $myLogoPath = '/'.$myLogo->store('/public/image/Profile/Logo','public');
+                $myLogoPath = '/'.$myLogo->store($this->logoPath,'public');
             } else {
                 $myLogoPath = Auth::user()->logo;
             }
             if ($myBackgroundLogo) {
-                $myBackgroundLogoPath = '/'.$myBackgroundLogo->store('/public/image/Profile/Logo','public');
+                $myBackgroundLogoPath = '/'.$myBackgroundLogo->store($this->myBackgroundLogoPath,'public');
             } else {
                 $myBackgroundLogoPath = Auth::user()->background_logo;
             }

@@ -7,9 +7,16 @@
                 </a>
             </div>
             <div class="my-auto font-bold text-center col-sm-1">
-                <a href="/FirstBaby/mypage/{{ Auth::user()->login_id }}" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
+                @if(Auth::check())
+                    <a href="/FirstBaby/mypage/{{ Auth::user()->login_id }}" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
                     マイページ
                 </a>
+                @else
+                    <a href="/FirstBaby/register" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
+                        新規登録
+                    </a>
+                @endif
+
             </div>
             {{-- <div class="py-2 my-auto mr-1 text-xs text-center border border-white rounded-lg col-sm-1 hover:text-pink-200 hover:bg-white hover:border-gray-500">マイカレンダー</div> --}}
             {{-- <div class="py-2 my-auto text-xs text-center border border-white rounded-lg col-sm-1 hover:text-pink-200 hover:bg-white hover:border-gray-500">タイムライン</div> --}}

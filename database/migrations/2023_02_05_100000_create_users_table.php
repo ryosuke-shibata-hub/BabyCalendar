@@ -18,8 +18,8 @@ return new class extends Migration
             $table->uuid('account_uuid')->nullable(false)->comment('UUID');;
             $table->string('account_name')->nullable(false)->comment('アカウント名');
             $table->string('login_id')->nullable(false)->comment('ログインID');
-            $table->binary('background_logo')->nullable(true)->comment('バックグラウンド画像');
-            $table->binary('logo')->nullable(true)->comment('プロフィール画像');
+            $table->string('background_logo')->nullable(true)->comment('バックグラウンド画像');
+            $table->string('logo')->nullable(true)->comment('プロフィール画像');
             $table->string('email')->unique()->nullable(false)->comment('登録メールアドレス');
             $table->text('comment')->nullable(true)->comment('ひとことコメント');
             $table->timestamp('email_verified_at')->nullable(true);
