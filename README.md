@@ -64,4 +64,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
 # BabyCalendar
+
+Dockerを再構築した時に入れないといけないライブラリ
+//zipファイルを使用する↓
+composer require stechstudio/laravel-zipstream

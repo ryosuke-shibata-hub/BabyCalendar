@@ -26,6 +26,12 @@ return [
             'Dir' => 'Logo',
             'Path' => '/public/image/Profile/BackgroundLogo',
         ],
-        'MyImg' => 'MyImg',
+        'MyImg' => [
+            'Path' => '/public/image/Profile/MyImg',
+        ],
+        'Download' => [
+            'MyImg' => '/app/public',
+            'Zip' => '/app/public/zip',
+        ]
     ]
 ];

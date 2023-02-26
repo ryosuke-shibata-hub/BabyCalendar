@@ -66,6 +66,7 @@ class MyPageController extends Controller
         }
         if ($accountUuid !== $authUuid) {
             Log::error("アカウント更新で不正なリクエスト",['認証UUID',$authUuid,'リクエストUUID',$accountUuid]);
+            return redirect(404);
         }
 
         try {
@@ -109,9 +110,9 @@ class MyPageController extends Controller
         }
 
         $authUuid = Auth::user()->account_uuid;
-        $requestUuid = $request->account_uuid;
-        if ($authUserUuid !== $requestUuid) {
-            Log::error("アカウント削除で例外処理発生(不正なリクエスト、認証ユーザーと異なるuuid)",['リクエストUUID',$request->account_uuid]);
+        $accountUuid = $request->account_uuid;
+        if ($authUserUuid !== $accountUuid) {
+            Log::error("アカウント更新で不正なリクエスト",['認証UUID',$authUuid,'リクエストUUID',$accountUuid]);
             return redirect(404);
         }
 
@@ -161,6 +162,7 @@ class MyPageController extends Controller
         }
         if ($accountUuid !== $authUuid) {
             Log::error("アカウント更新で不正なリクエスト",['認証UUID',$authUuid,'リクエストUUID',$accountUuid]);
+            return redirect(404);
         }
 
         try {

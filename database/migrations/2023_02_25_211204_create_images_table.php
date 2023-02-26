@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('account_uuid')->unique()->nullable(false)->comment('ユーザーID');
-            $table->string('image_path')->unique()->comment('イメージパス');
+            $table->string('account_uuid')->nullable(false)->comment('ユーザーID');
+            $table->string('image_path')->comment('イメージパス');
             $table->integer('delete_flg')->unsigned()->comment('削除フラグ');
             $table->timestamp('create_date')->nullable(false)->comment('作成日時');
             $table->timestamp('update_date')->nullable(false)->comment('更新日時');
