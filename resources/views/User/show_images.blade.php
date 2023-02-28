@@ -1,9 +1,9 @@
 @extends('MainContent.layouts')
 @section('title', 'FirstBaby-写真一覧-')
-@include('common.header')
 @section('content')
 <script src="{{ asset('/static/js/upload_image.js') }}" defer></script>
-<div class="container text-center w-75">
+@include('common.header')
+<div class="container pb-3 text-center w-75">
     <div class="text-center">
         <h2 class="py-3 font-bold">-写真-</h2>
     </div>
@@ -17,9 +17,9 @@
         <div class="mb-3 border-2 border-pink-100 rounded-md">
             <div class="row">
                 @foreach($showUserImage as $image)
-                    <div class="col-auto">
+                    <div class="col-md-2">
                         <input class="w-4 h-4 mt-1 text-pink-600 bg-pink-100 border-pink-300 rounded focus:ring-pink-500" type="checkbox" name="check_img[]" value="{{ $image->image }}">
-                        <img src="{{ Storage::url($image->image) }}" class="p-1 rounded-lg w-52 h-52">
+                        <img src="{{ Storage::url($image->image) }}" class="p-1 mx-auto rounded-lg">
                     </div>
                 @endforeach
             </div>
@@ -46,5 +46,5 @@
         </form>
     </div>
 </div>
-@endsection
 @include('Common.Guest.footer')
+@endsection

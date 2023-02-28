@@ -33,6 +33,7 @@ class ShowImageController extends Controller
         $validator = Validator::make($request->all(), [
             'account_uuid' => ['bail','required'],
             'files.*.upload_image'  => ['bail','required','image','max:5000'],
+            'files' => ['bail','required'],
         ]);
         if ($validator->fails()) {
             return redirect('/FirstBaby/show/image')

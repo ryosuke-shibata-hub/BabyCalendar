@@ -29,14 +29,16 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="main">
-        <div class="header">
-            @yield('header')
-        </div>
-        <div class="content">
-            @yield('content')
-        </div>
-        <div class="footer">
-            @yield('footer')
+        <div class="footer-layout">
+            {{-- <div class="header">
+                @yield('header')
+            </div> --}}
+            <div class="content">
+                @yield('content')
+            </div>
+            {{-- <div class="footer">
+                @yield('footer')
+            </div> --}}
         </div>
     </body>
 </html>
