@@ -3,7 +3,10 @@
         max-width: 1920px !important;
     }
 }
-
+img {
+    object-fit: cover;
+    height: 200px;
+}
 .main {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 100;
@@ -60,7 +63,10 @@ footer {
   height: 60px;
   /* background-color: #312d2a; */
 }
-
 .hidden-file {
     display: none;
+}
+.background-logo {
+    height: 400px;
+    width: 100%;
 }

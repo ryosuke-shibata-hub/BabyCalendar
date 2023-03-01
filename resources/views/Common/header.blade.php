@@ -34,7 +34,7 @@
                     @if(Auth::check())
                         <form action="/FirstBaby/logout" method="POST">
                         @csrf
-                        <button type="submit" class="px-4 py-2 -ml-3 text-xs text-center border border-white rounded-lg hover:text-white hover:bg-red-500 d-block">
+                        <button type="submit" class="px-4 py-2 my-auto -ml-3 text-xs text-center border border-white rounded-lg hover:text-white hover:bg-red-500 d-block">
                             ログアウト
                         </button>
                         </form>

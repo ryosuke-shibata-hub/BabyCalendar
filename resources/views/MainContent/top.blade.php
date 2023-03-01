@@ -1,8 +1,7 @@
 @extends('MainContent.layouts')
 @section('title', 'FirstBaby-トップ-')
-@include('common.header')
 @section('content')
-<div class="container">
+@include('common.header')
+<div class="container text-center w-75">
 </div>
 @endsection
-@include('Common.Guest.footer')

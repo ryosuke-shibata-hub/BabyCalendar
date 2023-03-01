@@ -1,14 +1,14 @@
 @extends('MainContent.layouts')
 @section('title', 'FirstBaby-トップマイページ-')
-@include('common.header')
 @section('content')
+@include('common.header')
 <div class="container text-center w-75">
   <div class="mb-3 border-2 border-pink-100 rounded-md">
     <div class="">
         @if($userInformation->background_logo == $defaltBackgroundImg)
-        <img class="h-50 w-100 d-inline-block" src="{{ asset($userInformation->background_logo) }}">
+        <img class="h-25 d-inline-block" src="{{ asset($userInformation->background_logo) }}">
         @else
-        <img class="h-50 w-100 d-inline-block"
+        <img class="d-inline-block background-logo"
             src="{{ Storage::url($userInformation->background_logo) }}">
         @endif
     </div>
