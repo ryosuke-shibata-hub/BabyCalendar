@@ -51,4 +51,11 @@ class Images extends Model
         ->where('delete_flg',config('const.User.Active.Active'))
         ->first();
     }
+
+    public static function countImg($authUuid)
+    {
+        return self::where('account_uuid',$authUuid)
+        ->where('delete_flg',config('const.User.Active.Active'))
+        ->count();
+    }
 }

@@ -18,8 +18,9 @@ function previewFile(file) {
         img.src = imageUrl; // 画像のURLをimg要素にセット
         img.classList.add("p-1");
         img.classList.add("rounded-lg");
-        img.classList.add("w-52");
-        img.classList.add("h-52");
+        // img.classList.add("w-52");
+        // img.classList.add("h-52");
+        img.classList.add("col-md-2");
         img.id = "preImage";
         preview.appendChild(img); // #previewの中に追加
     }

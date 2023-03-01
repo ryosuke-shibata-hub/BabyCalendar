@@ -19,7 +19,6 @@ class ShowImageController extends Controller
 {
     public function showImages(Request $request)
     {
-
         $userId = Auth::user()->account_uuid;
         $showUserImage = User::getImageLists($userId);
 
@@ -54,10 +53,13 @@ class ShowImageController extends Controller
             DB::beginTransaction();
 
             foreach ($request->file('files') as $index => $e) {
-
-                //画像アップ枚数は50枚の制限
-
                 $myImagePath = '/'.$e['upload_image']->store($this->myImagePath, 'public');
+
+                $count = Images::countImg($authUuid);
+                if($count >= $this->countImg) {
+                    return redirect('/FirstBaby/show/image')
+                    ->with('err_message', 'アップロードできる画像は最大で50枚です。');
+                }
                 Images::upload($myImagePath,$authUuid);
             }
 

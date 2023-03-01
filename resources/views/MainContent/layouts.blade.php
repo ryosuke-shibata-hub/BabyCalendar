@@ -7,7 +7,6 @@
         <link rel="shortcut icon" type="image/x-icon"  href="{{ asset('/favicon.ico') }}">
         <!-- FontAwesome -->
         <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-        {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
         <title>@yield('title')</title>
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -36,9 +35,9 @@
             <div class="content">
                 @yield('content')
             </div>
-            {{-- <div class="footer">
-                @yield('footer')
-            </div> --}}
+            <div class="footer">
+                @include('Common.Guest.footer')
+            </div>
         </div>
     </body>
 </html>

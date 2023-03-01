@@ -19,5 +19,6 @@ class Controller extends BaseController
         $this->myBackgroundLogoPath = config('const.Images.BackGroundImg.Path');
         $this->logoPath = config('const.Images.Logo.Path');
         $this->myImagePath = config('const.Images.MyImg.Path');
+        $this->countImg = config('const.Images.Count.MAX');
     }
 }

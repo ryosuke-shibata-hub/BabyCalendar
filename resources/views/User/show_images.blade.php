@@ -46,5 +46,4 @@
         </form>
     </div>
 </div>
-@include('Common.Guest.footer')
 @endsection

@@ -32,6 +32,9 @@ return [
         'Download' => [
             'MyImg' => '/app/public',
             'Zip' => '/app/public/zip',
-        ]
+        ],
+        'Count' => [
+            'MAX' => 50,
+        ],
     ]
 ];
