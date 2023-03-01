@@ -36,5 +36,11 @@ return [
         'Count' => [
             'MAX' => 50,
         ],
+    ],
+    'QuestionBox' => [
+        'Active' => [
+            'Active' => 0,
+            'Disable' => 1,
+        ],
     ]
 ];

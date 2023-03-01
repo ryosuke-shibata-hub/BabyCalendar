@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MainContent\TopController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\ShowImageController;
+use App\Http\Controllers\Question\QuestionBoxController;
 
 
 /*
@@ -28,6 +29,7 @@ Route::get('/', function () {
 Route::prefix('FirstBaby')->group(function () {
     Route::get('/top', [TopController::class, 'top'])->name('top');//アプリのトップページ
     Route::get('/delete/account/confirm', [TopController::class, 'accountDeleteSuccsess'])->name('accountDeleteSuccsess');//アカウント削除成功時の画面
+    Route::get('/Question', [QuestionBoxController::class, 'top'])->name('question_top');//質問箱のトップ
     Route::middleware('guest')->group(function () {
         Route::get('/welcome', [WelcomeController::class, 'welcome'])->name('welcome');//アプリのウェルカムページ
         Route::get('/login', [LoginController::class, 'login'])->name('login');//ログイン画面
@@ -36,7 +38,6 @@ Route::prefix('FirstBaby')->group(function () {
         Route::post('/register/process', [RegisterController::class, 'store'])->name('registerStore');//アカウント登録処理
         Route::get('/register/confirm', [RegisterController::class, 'confirm'])->name('registerConfirm');//登録完了画面
     });
-
     Route::middleware('auth')->group(function() {
         Route::post('/logout',[LoginController::class, 'logout'])->name('logout');//ログアウト処理
         Route::get('/mypage/{id}',[MyPageController::class, 'showMypage'])->name('showMypage');//マイページトップ

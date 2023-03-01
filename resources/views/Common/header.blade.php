@@ -11,7 +11,7 @@
                     @if(Auth::check())
                         <a href="/FirstBaby/mypage/{{ Auth::user()->login_id }}" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
                         マイページ
-                    </a>
+                        </a>
                     @else
                         <a href="/FirstBaby/register" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
                             新規登録
@@ -21,7 +21,11 @@
                 </div>
                 {{-- <div class="py-2 my-auto mr-1 text-xs text-center border border-white rounded-lg col-sm-1 hover:text-pink-200 hover:bg-white hover:border-gray-500">マイカレンダー</div> --}}
                 {{-- <div class="py-2 my-auto text-xs text-center border border-white rounded-lg col-sm-1 hover:text-pink-200 hover:bg-white hover:border-gray-500">タイムライン</div> --}}
-                <div class="py-2 my-auto mr-1 text-xs font-bold text-center border border-white rounded-lg col-sm-1 hover:text-pink-200 hover:bg-white hover:border-gray-500">質問箱</div>
+                <div class="my-auto font-bold text-center col-sm-1">
+                    <a href="/FirstBaby/Question" class="py-2 text-xs text-center border border-white rounded-lg d-block hover:text-pink-200 hover:bg-white">
+                    質問箱
+                    </a>
+                </div>
                 <div class="py-2 my-auto mr-1 text-xs font-bold text-center border border-white rounded-lg col-sm-1 hover:text-pink-200 hover:bg-white hover:border-gray-500">日記</div>
                 <div class="my-auto mr-1 text-center col-sm-4">
                     <div class="py-2 my-auto font-bold text-white border-2 border-white rounded-lg">
