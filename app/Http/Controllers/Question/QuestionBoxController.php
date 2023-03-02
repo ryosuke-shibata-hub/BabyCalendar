@@ -11,10 +11,16 @@ class QuestionBoxController extends Controller
 {
     public function top()
     {
-
         $questionList = QuestionBox::QuestionList();
+        $defaltLogoImg = "/image/defaultLogo.jpg";
 
-        // dd($questionList);
-        return view('Question.top');
+        return view('Question.top')
+        ->with('questionList', $questionList)
+        ->with('defaltLogoImg', $defaltLogoImg);
+    }
+
+    public function create()
+    {
+        return view('Question.create');
     }
 }

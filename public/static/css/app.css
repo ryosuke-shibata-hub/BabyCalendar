@@ -25,6 +25,13 @@ footer{
 .nikukyu-font {
   font-family: "Nikukyu";
 }
+/* .link-zone-parent {
+    position: relative;
+}
+.link-zone-child {
+    inset: 0;
+    position: absolute;
+} */
 .formInput {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 100;

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('question_boxes', function (Blueprint $table) {
             $table->id();
+            $table->uuid('post_uuid')->nullable(false)->comment('UUID');
             $table->foreignId('user_id')->constrained('users')->comment('ユーザーID');
             $table->string('title',255)->comment('質問のタイトル');
             $table->text('body')->comment('質問の内容');

@@ -22,11 +22,19 @@ class QuestionBox extends Model
     {
         $data = self::select(
             'title',
+            'post_uuid',
             'body',
             'view_counter',
-            'updated_at',
+            'question_boxes.updated_at as updated_at',
+            'users.logo as logo',
+            'users.login_id as login_id',
+            'users.account_name as user_name'
         )
-        ->where('delete_flg', config('const.QuestionBox.Active.Active'))
+        ->where('question_boxes.delete_flg', config('const.QuestionBox.Active.Active'))
+        ->where('users.delete_flg', config('const.User.Active.Active'));
+
+        $data = $data
+        ->leftJoin('users','question_boxes.user_id', '=', 'users.id')
         ->get();
 
         return $data;
