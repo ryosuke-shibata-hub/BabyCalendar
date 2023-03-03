@@ -52,7 +52,9 @@ Route::prefix('FirstBaby')->group(function () {
         Route::get('/show/image', [ShowImageController::class, 'showImages'])->name('showImages');//写真の一覧
         Route::post('/upload/image', [ShowImageController::class, 'uploadImages'])->name('uploadImages');//写真のアップロード
         Route::post('/edit/image', [ShowImageController::class, 'editImages'])->name('editImages');//写真の削除、ダウンロード
-        Route::get('/create/question', [QuestionBoxController::class, 'create'])->name('question_create');//質問の作成)
+        Route::get('/create/question', [QuestionBoxController::class, 'create'])->name('question_create');//質問の作成画面
+        Route::post('/create/question/store', [QuestionBoxController::class, 'store'])->name('question_store');//質問の作成処理
+        Route::get('/Question/{id}', [QuestionBoxController::class, 'detail'])->name('question_detail');//質問の詳細画面
         Route::get('/test',[TestController::class,'index'])->name('index');
         Route::post('/test/post',[TestController::class,'create'])->name('create');
         Route::post('/test/test', [TestController::class,'test'])->name('create_test');

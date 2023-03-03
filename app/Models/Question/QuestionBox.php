@@ -4,6 +4,7 @@ namespace App\Models\Question;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 use DB;
 
@@ -38,5 +39,34 @@ class QuestionBox extends Model
         ->get();
 
         return $data;
+    }
+
+    public static function createQuestion($authUuid, $questionTitle, $questionBody)
+    {
+        $data = new QuestionBox();
+        $data->post_uuid = (string) Str::uuid();
+        $data->account_uuid = $authUuid;
+        $data->title = $questionTitle;
+        $data->body = $questionBody;
+        $data->view_counter = config('const.QuestionBox.ViewCounter.Default');
+        $data->delete_flg = config('const.QuestionBox.Active.Active');
+        $data->created_at = now();
+        $data->updated_at = now();
+        $data->save();
+
+        return $data;
+    }
+
+    public static function detail($id)
+    {
+        return self::select(
+            'title',
+            'body',
+            'view_counter',
+            'updated_at',
+        )
+        ->where('post_uuid',$id)
+        ->where('delete_flg',config('const.QuestionBox.Active.Active'))
+        ->first();
     }
 }

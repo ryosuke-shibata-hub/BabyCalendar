@@ -42,5 +42,8 @@ return [
             'Active' => 0,
             'Disable' => 1,
         ],
-    ]
+        'ViewCounter' => [
+            'Default' => 0,
+        ],
+    ],
 ];
