@@ -46,4 +46,10 @@ return [
             'Default' => 0,
         ],
     ],
+    'Tags' => [
+        'Active' => [
+            'Active' => 0,
+            'Disable' => 1,
+        ],
+    ],
 ];

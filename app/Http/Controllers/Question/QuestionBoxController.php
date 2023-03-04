@@ -63,7 +63,7 @@ class QuestionBoxController extends Controller
 
             DB::commit();
 
-            $newMyQuestoiin = $newQuestion->post_uuid;
+            $newMyQuestoiin = $newQuestion->question_uuid;
 
             return redirect('FirstBaby/Question/'.$newMyQuestoiin)
             ->with('succsess_msg',"質問を投稿しました");
@@ -77,7 +77,12 @@ class QuestionBoxController extends Controller
     public function detail($id)
     {
         $questionDetail = QuestionBox::detail($id);
+        $viewCount = QuestionBox::viewCount($id);
+        $defaltLogoImg = "/image/defaultLogo.jpg";
+        Log::info('質問詳細の記事',['記事',$questionDetail]);
+
         return view('Question.detail')
-        ->with('questionDetail', $questionDetail);
+        ->with('questionDetail', $questionDetail)
+         ->with('defaltLogoImg', $defaltLogoImg);
     }
 }

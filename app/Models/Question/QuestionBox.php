@@ -23,28 +23,33 @@ class QuestionBox extends Model
     {
         $data = self::select(
             'title',
-            'post_uuid',
+            'question_boxes.question_uuid',
             'body',
             'view_counter',
             'question_boxes.updated_at as updated_at',
             'users.logo as logo',
             'users.login_id as login_id',
-            'users.account_name as user_name'
+            'users.account_name as user_name',
+            'tags.question_uuid',
+            'tags.tag_name as tags',
+            'tags.tag_id',
         )
         ->where('question_boxes.delete_flg', config('const.QuestionBox.Active.Active'))
-        ->where('users.delete_flg', config('const.User.Active.Active'));
+        ->where('users.delete_flg', config('const.User.Active.Active'))
+        ->where('tags.delete_flg',config('const.Tags.Active.Active'));
 
         $data = $data
-        ->leftJoin('users','question_boxes.user_id', '=', 'users.id')
+        ->Join('users','question_boxes.account_uuid', '=', 'users.account_uuid')
+        ->Join('tags', 'question_boxes.question_uuid', '=', 'tags.question_uuid')
         ->get();
 
         return $data;
     }
 
-    public static function createQuestion($authUuid, $questionTitle, $questionBody)
+    public static function createQuestion($authUuid, $questionBody, $questionTitle)
     {
         $data = new QuestionBox();
-        $data->post_uuid = (string) Str::uuid();
+        $data->question_uuid = (string) Str::uuid();
         $data->account_uuid = $authUuid;
         $data->title = $questionTitle;
         $data->body = $questionBody;
@@ -57,16 +62,34 @@ class QuestionBox extends Model
         return $data;
     }
 
+    public static function viewCount($id)
+    {
+        $data = QuestionBox::where('question_uuid',$id)
+        ->where('delete_flg',config('const.QuestionBox.Active.Active'))
+        ->first();
+
+        $data->view_counter++;
+        $data->save();
+    }
     public static function detail($id)
     {
-        return self::select(
+        $result = self::select(
             'title',
             'body',
             'view_counter',
             'updated_at',
+            'users.account_name as user_name',
+            'users.login_id',
+            'users.logo'
         )
-        ->where('post_uuid',$id)
-        ->where('delete_flg',config('const.QuestionBox.Active.Active'))
+        ->where('question_uuid',$id)
+        ->where('question_boxes.delete_flg',config('const.QuestionBox.Active.Active'));
+
+        $result = $result
+        ->leftJoin('users','question_boxes.account_uuid', 'users.account_uuid')
+        ->where('users.delete_flg',config('const.User.Active.Active'))
         ->first();
+
+        return $result;
     }
 }

@@ -10,7 +10,7 @@
         <div class="col-sm-6">
             @foreach($questionList as $list)
                 <article class="p-2 my-3 border-2 border-pink-100 rounded-md link-zone-parent">
-                    <a href="/FirstBaby/question_box/{{ $list->post_uuid }}" tabindex="-1" class="link-zone-child"></a>
+                    <a href="/FirstBaby/Question/{{ $list->question_uuid }}" tabindex="-1" class="link-zone-child"></a>
                         <header style="display:flex;">
                             <a href="/FirstBaby/{{ $list->login_id }}">
                                 @if($list->logo == $defaltLogoImg)
@@ -32,11 +32,31 @@
                                 </span>
                             </div>
                         </header>
-                        <h2 class="pl-3 ml-20 font-bold text-left text-gray-700 display-6">
-                            <a href="/FirstBaby/question/{{ $list->post_uuid }}" class="hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
+                        <h2 class="pl-3 ml-20 -mt-3 text-3xl font-bold text-left text-gray-700">
+                            <a href="/FirstBaby/Question/{{ $list->question_uuid }}" class="hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
                                 {{ $list->title }}
                             </a>
                         </h2>
+                        <div class="row">
+                            <div class="col-sm-1"></div>
+                            <div class="text-xs col-sm-7">
+                                <a href="#" class="outline-none hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
+                                    <i class="fa-solid fa-hashtag"></i>{{ $list->tags }}
+                                </a>
+                            </div>
+                            <div class="text-xs text-right col-sm-2">
+                                <a class="outline-none hover:text-pink-300">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+                                <span>1</span>
+                            </div>
+                            <div class="text-xs text-left col-sm-2">
+                                <span class="">
+                                    閲覧数：{{ $list->view_counter }} view
+                                </span>
+                            </div>
+                        </div>
+
                 </article>
             @endforeach
         </div>

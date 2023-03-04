@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('question_boxes', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('post_uuid')->nullable(false)->comment('UUID');
-            $table->uuid('account_uuid')->foreignId('account_uuid')->constrained('users')->comment('ユーザーID');
-            $table->string('title',255)->comment('質問のタイトル');
-            $table->text('body')->comment('質問の内容');
-            $table->integer('view_counter')->default(0)->comment('閲覧数');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->uuid('tag_id')->comment('TagId');
+            $table->uuid('question_uuid')->foreignId('question_uuid')->constrained('question_boxes')->comment('質問ID');
+            $table->string('tag_name')->comment('タグネーム');
+            $table->unique(['question_id','tag_id'])->comment('ユニーク制約');
             $table->integer('delete_flg')->default(0)->comment('削除フラグ');
             $table->timestamp('deleted_at')->nullable()->comment('削除日時');
             $table->timestamps();
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_boxes');
+        Schema::dropIfExists('tags');
     }
 };
