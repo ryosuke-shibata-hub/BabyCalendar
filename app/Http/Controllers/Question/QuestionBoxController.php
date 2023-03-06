@@ -17,7 +17,7 @@ class QuestionBoxController extends Controller
     {
         $questionList = QuestionBox::QuestionList();
         $defaltLogoImg = "/image/defaultLogo.jpg";
-
+// dd($questionList);
         return view('Question.top')
         ->with('questionList', $questionList)
         ->with('defaltLogoImg', $defaltLogoImg);

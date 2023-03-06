@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('tag_id')->comment('TagId');
-            $table->uuid('question_uuid')->foreignId('question_uuid')->constrained('question_boxes')->comment('質問ID');
+            $table->uuid('tag_uuid')->comment('tag_id');
             $table->string('tag_name')->comment('タグネーム');
-            $table->unique(['question_id','tag_id'])->comment('ユニーク制約');
             $table->integer('delete_flg')->default(0)->comment('削除フラグ');
             $table->timestamp('deleted_at')->nullable()->comment('削除日時');
             $table->timestamps();

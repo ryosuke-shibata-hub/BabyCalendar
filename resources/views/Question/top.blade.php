@@ -24,7 +24,7 @@
                             <div class="mt-2 ml-2">
                                 <p class="text-sm font-bold text-gray-700 hover:text-pink-300">
                                     <a href="/FirstBaby/mypage/{{ $list->login_id }}" class="outline-none hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
-                                        &#64;{{ $list->user_name }}
+                                        &#64;{{ $list->account_name }}
                                     </a>
                                 </p>
                                 <span class="text-xs text-left d-block">
@@ -40,9 +40,11 @@
                         <div class="row">
                             <div class="col-sm-1"></div>
                             <div class="text-xs col-sm-7">
+                            @foreach($list->tags as $tag)
                                 <a href="#" class="outline-none hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
-                                    <i class="fa-solid fa-hashtag"></i>{{ $list->tags }}
+                                    <i class="fa-solid fa-hashtag"></i>{{ $tag->tag_name }}
                                 </a>
+                            @endforeach
                             </div>
                             <div class="text-xs text-right col-sm-2">
                                 <a class="outline-none hover:text-pink-300">

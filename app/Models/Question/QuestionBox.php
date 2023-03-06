@@ -6,12 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+use App\Models\Question\Tags;
+use App\Models\User\User;
+
 use DB;
 
 class QuestionBox extends Model
 {
     use HasFactory;
     protected $table = 'question_boxes';
+    public $incrementing = false;
+    protected $primaryKey = 'question_uuid';
+
+    protected $fillable = [
+        'question_uuid',
+    ];
 
     protected $dates = [
         'created_at',
@@ -19,31 +28,41 @@ class QuestionBox extends Model
         'deleted_at',
     ];
 
+    // public function users()
+    // {
+    //     return $this->belongsTo(User::class,'account_uuid','account_uuid')
+    //     ->select(array(
+    //         'account_uuid',
+    //         'account_name',
+    //         'login_id',
+    //         'logo',
+    //     ));
+    // }
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class,'relation_tags','question_uuid','tag_uuid')
+        ->select(array(
+            'tags.tag_name as tag_name',
+            'relation_tags.tag_uuid as tag_uuid',
+            'relation_tags.question_uuid as question_uuid',
+            ));
+    }
+
+    public static function indexQuery()
+    {
+        return self::select('*')
+        ->join('users','question_boxes.account_uuid', '=', 'users.account_uuid')
+        ->with([
+            'tags',
+            // 'users',
+        ]);
+
+    }
+
     public static function QuestionList()
     {
-        $data = self::select(
-            'title',
-            'question_boxes.question_uuid',
-            'body',
-            'view_counter',
-            'question_boxes.updated_at as updated_at',
-            'users.logo as logo',
-            'users.login_id as login_id',
-            'users.account_name as user_name',
-            'tags.question_uuid',
-            'tags.tag_name as tags',
-            'tags.tag_id',
-        )
-        ->where('question_boxes.delete_flg', config('const.QuestionBox.Active.Active'))
-        ->where('users.delete_flg', config('const.User.Active.Active'))
-        ->where('tags.delete_flg',config('const.Tags.Active.Active'));
-
-        $data = $data
-        ->Join('users','question_boxes.account_uuid', '=', 'users.account_uuid')
-        ->Join('tags', 'question_boxes.question_uuid', '=', 'tags.question_uuid')
+        return self::indexQuery()
         ->get();
-
-        return $data;
     }
 
     public static function createQuestion($authUuid, $questionBody, $questionTitle)
