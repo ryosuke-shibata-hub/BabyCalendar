@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 use App\Models\Question\QuestionBox;
+use App\Models\Question\Tags;
+use App\Models\Question\RelationTag;
 
 use DB;
 use Log;
 class QuestionBoxController extends Controller
 {
-    public function top()
+    public function top(Request $request)
     {
-        $questionList = QuestionBox::QuestionList();
+        $questionList = QuestionBox::QuestionList($request);
         $defaltLogoImg = "/image/defaultLogo.jpg";
-// dd($questionList);
+
         return view('Question.top')
         ->with('questionList', $questionList)
         ->with('defaltLogoImg', $defaltLogoImg);
@@ -26,6 +29,7 @@ class QuestionBoxController extends Controller
     public function create()
     {
         $userId = Auth::user()->account_uuid;
+
         return view('Question.create')
         ->with('userId', $userId);
     }
@@ -35,7 +39,7 @@ class QuestionBoxController extends Controller
         $validator = Validator::make($request->all(), [
             'account_uuid' => ['bail','required','string'],
             'title' => ['bail','required','string','max:30',],
-            // 'tag' => ['bail','image','max:5000'],
+            'tag' => ['bail','max:100'],
             'detail' => ['bail','required','string','max:5000'],
         ]);
         if ($validator->fails()) {
@@ -48,23 +52,32 @@ class QuestionBoxController extends Controller
         $questionTitle = $request->title;
         $questionBody = $request->detail;
 
-        if ($accountUuid !== $authUuid) {
-            Log::error("アカウント更新で不正なリクエスト",['認証UUID',$authUuid,'リクエストUUID',$accountUuid]);
+        if ($accountUuid != $authUuid) {
+            Log::error("質問の投稿で不正なリクエスト",['認証UUID',$authUuid,'リクエストUUID',$accountUuid]);
             return redirect(404);
         }
         try {
             DB::beginTransaction();
 
-            if (!empty($request->tag)) {
-
-            }
-
             $newQuestion = QuestionBox::createQuestion($authUuid, $questionBody, $questionTitle);
 
+            if (!empty($request->tag)) {
+                //#タグのついた文字列を取得
+                preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag, $match);
+                $tags = [];
+                //$matchの中でも#が付いていない方を使用する(配列番号で言うと1)
+                //tagテーブルにリクエストできたタグがなければ作成あればスキップ
+                foreach ($match[1] as $tag) {
+                    $data = Tags::create($tag);
+                    array_push($tags, $data);
+                };
+                foreach ($tags as $tag) {
+                    $questionId = $newQuestion->question_id;
+                    RelationTag::create($questionId,$tag);
+                };
+            }
             DB::commit();
-
             $newMyQuestoiin = $newQuestion->question_uuid;
-
             return redirect('FirstBaby/Question/'.$newMyQuestoiin)
             ->with('succsess_msg',"質問を投稿しました");
         } catch (\Throwable $th) {

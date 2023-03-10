@@ -23,11 +23,11 @@
                     <div class="mt-2 col-sm-8">
                         <p class="text-sm font-bold text-gray-700 hover:text-pink-300">
                             <a href="/FirstBaby/mypage/{{ $questionDetail->login_id }}" class="outline-none hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
-                                &#64;{{ $questionDetail->user_name }}
+                                &#64;{{ $questionDetail->account_name }}
                             </a>
                         </p>
                         <span class="text-xs text-left d-block">
-                            {{ $questionDetail->updated_at->format('Y年m月d日') }}に投稿
+                            {{Carbon\Carbon::parse($questionDetail->created_at)->format('Y年m月n日')}}に投稿
                         </span>
                     </div>
                     <div class="text-end col-sm-3">
@@ -40,9 +40,12 @@
                     {{ $questionDetail->title }}
                 </h2>
                 <div class="py-3 ml-16 text-sm">
-                    <a href="#" class="outline-none hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
-                        <i class="fa-solid fa-hashtag"></i>夜泣き
-                    </a>
+                    {{-- タグネームをカンマ区切りで分割して書くタグを回す --}}
+                    @foreach(explode(',',$questionDetail->tag_name) as $tag)
+                        <a href="{{ $tag }}" class="outline-none hover:text-pink-300 hover:border-b-2 hover:border-pink-300">
+                            <i class="fa-solid fa-hashtag"></i>{{ $tag }}
+                        </a>
+                    @endforeach
                 </div>
                 <section>
                     <div class="ml-16 text-xl">

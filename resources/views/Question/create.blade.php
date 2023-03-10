@@ -6,11 +6,11 @@
     <div class="">
         @include('Message.Error.validate')
     </div>
-    <form action="/FirstBaby/create/question/store" method="POST">
+    <form action="/FirstBaby/create/question/store" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="account_uuid" value="{{ $userId }}">
         <input type="text" class="w-full px-2 py-2 my-1 mr-3 bg-gray-50 border border-pink-300 text-gray-700 text-xl rounded-lg focus:ring-pink-500 focus:border-pink-500 block p-2.5 focus:ring-4 ring-lime-800" placeholder="タイトル" name="title">
-        <input type="text" class="w-full px-2 py-2 my-1 mr-3 bg-gray-50 border border-pink-300 text-gray-700 text-xl rounded-lg focus:ring-pink-500 focus:border-pink-500 block p-2.5 focus:ring-4 ring-lime-800" placeholder="ハッシュタグを最大5個まで登録できます。ハッシュタグをつける場合は「#」をハッシュタグの先頭に付けてください。例)#離乳食#夜泣き" name="tag[]">
+        <input type="text" class="w-full px-2 py-2 my-1 mr-3 bg-gray-50 border border-pink-300 text-gray-700 text-xl rounded-lg focus:ring-pink-500 focus:border-pink-500 block p-2.5 focus:ring-4 ring-lime-800" placeholder="ハッシュタグを最大5個まで登録できます。ハッシュタグをつける場合は「#」をハッシュタグの先頭に付けてください。例)#離乳食#夜泣き" name="tag">
         <textarea class="w-full question-text-zone bg-gray-50 border border-pink-300 text-gray-700 text-xl rounded-lg focus:ring-pink-500 focus:border-pink-500 block p-2.5 focus:ring-4 ring-lime-800" name="detail"></textarea>
         <div class="pt-3 pb-2 row">
             <div class="col-sm-2">

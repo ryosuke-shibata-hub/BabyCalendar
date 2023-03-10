@@ -16,10 +16,10 @@ class QuestionBox extends Model
     use HasFactory;
     protected $table = 'question_boxes';
     public $incrementing = false;
-    protected $primaryKey = 'question_uuid';
+    protected $primaryKey = 'question_id';
 
     protected $fillable = [
-        'question_uuid',
+        'question_id',
     ];
 
     protected $dates = [
@@ -28,47 +28,61 @@ class QuestionBox extends Model
         'deleted_at',
     ];
 
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class,'account_uuid','account_uuid')
-    //     ->select(array(
-    //         'account_uuid',
-    //         'account_name',
-    //         'login_id',
-    //         'logo',
-    //     ));
-    // }
-    public function tags()
+    public function __construct()
     {
-        return $this->belongsToMany(Tags::class,'relation_tags','question_uuid','tag_uuid')
-        ->select(array(
-            'tags.tag_name as tag_name',
-            'relation_tags.tag_uuid as tag_uuid',
-            'relation_tags.question_uuid as question_uuid',
-            ));
+        $random_init = config('const.RandomNumber.Random_INIT.Rand');
+        $digit = config('const.RandomNumber.Random_INIT.Digit');
+        $zero = config('const.RandomNumber.Random_INIT.Zero');
     }
 
-    public static function indexQuery()
+    public static function QuestionList($request)
     {
-        return self::select('*')
-        ->join('users','question_boxes.account_uuid', '=', 'users.account_uuid')
-        ->with([
-            'tags',
-            // 'users',
-        ]);
+        $commonDeleteFlg = config('const.COMMON.DELETE_FLG');
 
-    }
+        $question = DB::table('question_boxes')
+        ->where('question_boxes.delete_flg',$commonDeleteFlg)
+        ->leftJoin('users','question_boxes.account_uuid','=', 'users.account_uuid')
+        ->leftJoin('relation_tags','question_boxes.question_id','=','relation_tags.question_id')
+        ->leftJoin('tags','relation_tags.tag_id','=','tags.tag_id')
+        ->where('tags.delete_flg',$commonDeleteFlg)
+        ->select(
+            'users.login_id as login_id',
+            'users.logo as logo',
+            'users.account_name as account_name',
+            'question_boxes.question_id as question_id',
+            'question_boxes.title as title',
+            'question_boxes.updated_at as updated_at',
+            'question_boxes.created_at as created_at',
+            'question_boxes.view_counter as view_counter',
+            //グループ化してタグをまとめる
+            DB::raw('GROUP_CONCAT(tags.tag_name) as tag_name'),
+        )
+        //質問をグループ化して重複を防ぐ
+        ->groupBy('question_boxes.question_id');
 
-    public static function QuestionList()
-    {
-        return self::indexQuery()
-        ->get();
+        //検索条件があった場合
+        $searchWord = $request->search_word;
+        if ($searchWord) {
+            $question = $question
+            ->where('title','like','%'.$searchWord.'%')
+            ->orwhere('body','like','%'.$searchWord.'%')
+            ->orwhere('account_name','like','%'.$searchWord.'%');
+        }
+        $question->orderBy('question_boxes.created_at','desc');
+
+        return $question->get();
     }
 
     public static function createQuestion($authUuid, $questionBody, $questionTitle)
     {
+
+        $min_init = config('const.RandomNumber.Random_INIT.Min');
+        $max_init = config('const.RandomNumber.Random_INIT.Max');
+        $digit = config('const.RandomNumber.Random_INIT.Digit');
+        $zero = config('const.RandomNumber.Random_INIT.Zero');
+
         $data = new QuestionBox();
-        $data->question_uuid = (string) Str::uuid();
+        $data->question_id = str_pad(random_int($min_init,$max_init),$digit,$zero, STR_PAD_LEFT);
         $data->account_uuid = $authUuid;
         $data->title = $questionTitle;
         $data->body = $questionBody;
@@ -83,7 +97,7 @@ class QuestionBox extends Model
 
     public static function viewCount($id)
     {
-        $data = QuestionBox::where('question_uuid',$id)
+        $data = QuestionBox::where('question_id',$id)
         ->where('delete_flg',config('const.QuestionBox.Active.Active'))
         ->first();
 
@@ -92,23 +106,31 @@ class QuestionBox extends Model
     }
     public static function detail($id)
     {
-        $result = self::select(
-            'title',
-            'body',
-            'view_counter',
-            'updated_at',
-            'users.account_name as user_name',
-            'users.login_id',
-            'users.logo'
+        $commonDeleteFlg = config('const.COMMON.DELETE_FLG');
+
+        $question = DB::table('question_boxes')
+        ->where('question_boxes.delete_flg',$commonDeleteFlg)
+        ->where('question_boxes.question_id',$id)
+        ->leftJoin('users','question_boxes.account_uuid','=', 'users.account_uuid')
+        ->leftJoin('relation_tags','question_boxes.question_id','=','relation_tags.question_id')
+        ->leftJoin('tags','relation_tags.tag_id','=','tags.tag_id')
+        ->where('tags.delete_flg',$commonDeleteFlg)
+        ->select(
+            'users.login_id as login_id',
+            'users.logo as logo',
+            'users.account_name as account_name',
+            'question_boxes.question_id as question_id',
+            'question_boxes.title as title',
+            'question_boxes.body as body',
+            'question_boxes.updated_at as updated_at',
+            'question_boxes.created_at as created_at',
+            'question_boxes.view_counter as view_counter',
+            //グループ化してタグをまとめる
+            DB::raw('GROUP_CONCAT(tags.tag_name) as tag_name'),
         )
-        ->where('question_uuid',$id)
-        ->where('question_boxes.delete_flg',config('const.QuestionBox.Active.Active'));
+        //質問をグループ化して重複を防ぐ
+        ->groupBy('question_boxes.question_id');
 
-        $result = $result
-        ->leftJoin('users','question_boxes.account_uuid', 'users.account_uuid')
-        ->where('users.delete_flg',config('const.User.Active.Active'))
-        ->first();
-
-        return $result;
+        return $question->first();
     }
 }

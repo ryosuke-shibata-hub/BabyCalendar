@@ -55,6 +55,7 @@ Route::prefix('FirstBaby')->group(function () {
         Route::get('/create/question', [QuestionBoxController::class, 'create'])->name('question_create');//質問の作成画面
         Route::post('/create/question/store', [QuestionBoxController::class, 'store'])->name('question_store');//質問の作成処理
         Route::get('/Question/{id}', [QuestionBoxController::class, 'detail'])->name('question_detail');//質問の詳細画面
+        Route::get('/Question/search/{id}', [QuestionBoxController::class, 'search'])->name('question_search');//質問の検索
         Route::get('/test',[TestController::class,'index'])->name('index');
         Route::post('/test/post',[TestController::class,'create'])->name('create');
         Route::post('/test/test', [TestController::class,'test'])->name('create_test');

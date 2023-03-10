@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->uuid('tag_uuid')->comment('tag_id');
-            $table->string('tag_name')->comment('タグネーム');
+        Schema::create('question_boxes', function (Blueprint $table) {
+            $table->id();
+            $table->integer('question_id')->nullable(false)->comment('UUID');
+            $table->uuid('account_uuid')->foreignId('account_uuid')->constrained('users')->comment('ユーザーID');
+            $table->string('title',255)->comment('質問のタイトル');
+            $table->text('body')->comment('質問の内容');
+            $table->integer('view_counter')->default(0)->comment('閲覧数');
             $table->integer('delete_flg')->default(0)->comment('削除フラグ');
             $table->timestamp('deleted_at')->nullable()->comment('削除日時');
             $table->timestamps();
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('question_boxes');
     }
 };

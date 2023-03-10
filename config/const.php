@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'COMMON' => [
+        'DELETE_FLG' => 0,
+    ],
     'User' => [
         'Active' => [
             'Active' => 0,
@@ -50,6 +53,14 @@ return [
         'Active' => [
             'Active' => 0,
             'Disable' => 1,
+        ],
+    ],
+    'RandomNumber' => [
+        'Random_INIT' => [
+            'Min' => 0,
+            'Max' => 99999999,
+            'Digit' => 8,
+            'Zero' => 0,
         ],
     ],
 ];

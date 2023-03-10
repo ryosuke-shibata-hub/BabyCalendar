@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('relation_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('tag_uuid');
-            $table->uuid('question_uuid');
-            $table->unique(['question_uuid','tag_uuid']);
-            $table->foreign('tag_uuid')->references('id')->on('tags')->onDelete('cascade');
-            $table->foreign('question_uuid')->references('id')->on('question_boxes')->onDelete('cascade');
+            $table->integer('tag_id');
+            $table->integer('question_id');
+            $table->unique(['question_id','tag_id']);
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('question_boxes')->onDelete('cascade');
         });
     }
 
