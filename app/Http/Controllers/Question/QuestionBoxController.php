@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\Question\QuestionBox;
 use App\Models\Question\Tags;
 use App\Models\Question\RelationTag;
+use App\Models\Question\QuestionFavorities;
 
 use DB;
 use Log;
@@ -97,5 +98,46 @@ class QuestionBoxController extends Controller
         return view('Question.detail')
         ->with('questionDetail', $questionDetail)
          ->with('defaltLogoImg', $defaltLogoImg);
+    }
+
+    public function QuestionFavorities(Request $request)
+    {
+
+        $validator = Validator::make($request->all(),[
+            'question_id' => ['required','string'],
+            'user_id' => ['required','string'],
+            'favorite_flg' => ['required','string'],
+        ]);
+        //バリデーションに引っかかるものは全て不正リクエストのため不正扱い
+        if ($validator->fails()) {
+            Log::alert("質問のいいねでバリデーション不正",[$validator->fails()]);
+            return redirect(404);
+        }
+        // if ($request->favorite_flg =! 1 || $request->favorite_flg =! 0) {
+        //     //フラグが1 or 2 以外だったら不正リクエスト
+        //     Log::alert($request->favorite_flg);
+        //     return redirect(404);
+        // }
+        // dd($request);
+        try {
+
+            DB::beginTransaction();
+
+            $favoriteFlg = $request->favorite_flg;
+            $questionId = $request->question_id;
+            $userId = $request->user_id;
+
+            $favoriteStatus = QuestionFavorities::QuestionCreateFavorities($questionId, $userId, $favoriteFlg);
+
+            DB::commit();
+
+            return redirect('/FirstBaby/Question');
+
+        } catch (\Throwable $th) {
+            Log::error("質問のいいね処理で例外処理発生",['アカウントUUID',$userId,'質問のID',$questionId,$th]);
+            return redirect('/FirstBaby/Question')
+            ->with('err_message','質問のいいね処理に失敗しました。操作を再度お試しください');
+        }
+
     }
 }

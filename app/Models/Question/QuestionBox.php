@@ -44,6 +44,7 @@ class QuestionBox extends Model
         ->leftJoin('users','question_boxes.account_uuid','=', 'users.account_uuid')
         ->leftJoin('relation_tags','question_boxes.question_id','=','relation_tags.question_id')
         ->leftJoin('tags','relation_tags.tag_id','=','tags.tag_id')
+        ->leftJoin('question_favorities','question_boxes.question_id','=','question_favorities.question_id')
         ->where('tags.delete_flg',$commonDeleteFlg)
         ->select(
             'users.login_id as login_id',
@@ -56,6 +57,9 @@ class QuestionBox extends Model
             'question_boxes.view_counter as view_counter',
             //グループ化してタグをまとめる
             DB::raw('GROUP_CONCAT(tags.tag_name) as tag_name'),
+            //いいねの判定
+            DB::raw('IF(COUNT(question_favorities.question_id)>0,1,0) as FavoriteFlg'),
+            DB::raw('COUNT(question_favorities.question_id) as FavoriteCount'),
         )
         //質問をグループ化して重複を防ぐ
         ->groupBy('question_boxes.question_id');
