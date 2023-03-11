@@ -16,14 +16,17 @@ class QuestionFavorities extends Model
 
     public static function QuestionCreateFavorities($questionId, $userId, $favoriteFlg)
     {
-        if ($favoriteFlg == '0') {
+        $LikeItFavorite = config('const.QuestionBox.Favorite.LikeItFavorite');
+        $NotLikeFavorite = config('const.QuestionBox.Favorite.NotLikeFavorite');
+
+        if ($favoriteFlg == $LikeItFavorite) {
             $data = new QuestionFavorities();
             $data->account_uuid = $userId;
             $data->question_id = $questionId;
             $data->created_at = now();
             $data->updated_at = now();
             $data->save();
-        } elseif($favoriteFlg == '1') {
+        } elseif($favoriteFlg == $NotLikeFavorite) {
             DB::table('question_favorities')
             ->select(
                 'question_id',
@@ -32,6 +35,8 @@ class QuestionFavorities extends Model
             ->where('question_id',$questionId)
             ->where('account_uuid',$userId)
             ->delete();
+        } else {
+            Log::alert("質問のいいねで不正リクエスト",['リクエストされたフラグ',$favoriteFlg]);
         }
     }
 }

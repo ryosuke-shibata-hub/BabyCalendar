@@ -53,10 +53,24 @@
                     </div>
                 </section>
                 <div class="pt-3 text-right">
-                    <a class="outline-none hover:text-pink-300">
-                        <i class="fa-regular fa-heart"></i>
-                    </a>
-                    <span>1</span>
+                    <form action="/FirstBaby/Question/favorite" method="POST">
+                        @csrf
+                        <input type="hidden" name="question_id" value="{{ $questionDetail->question_id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->account_uuid }}">
+                        @if($questionDetail->FavoriteFlg === 0)
+                            <input type="hidden" name="favorite_flg" value="0">
+                            <button type="submit" class="outline-none hover:text-pink-300">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        @elseif($questionDetail->FavoriteFlg === 1)
+                            <input type="hidden" name="favorite_flg" value="1">
+                            <button type="submit" class="text-pink-400 outline-none hover:text-pink-300">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        @endif
+
+                        <span>{{ $questionDetail->FavoriteCount }}</span>
+                    </form>
                 </div>
             </div>
         </div>

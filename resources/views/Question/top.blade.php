@@ -80,7 +80,6 @@
                             <div class="text-xs text-right col-sm-2">
                             <form action="/FirstBaby/Question/favorite" method="POST">
                                 @csrf
-
                                 <input type="hidden" name="question_id" value="{{ $list->question_id }}">
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->account_uuid }}">
                                 @if($list->FavoriteFlg === 0)

@@ -113,12 +113,7 @@ class QuestionBoxController extends Controller
             Log::alert("質問のいいねでバリデーション不正",[$validator->fails()]);
             return redirect(404);
         }
-        // if ($request->favorite_flg =! 1 || $request->favorite_flg =! 0) {
-        //     //フラグが1 or 2 以外だったら不正リクエスト
-        //     Log::alert($request->favorite_flg);
-        //     return redirect(404);
-        // }
-        // dd($request);
+
         try {
 
             DB::beginTransaction();

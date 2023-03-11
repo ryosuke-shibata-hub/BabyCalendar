@@ -48,6 +48,10 @@ return [
         'ViewCounter' => [
             'Default' => 0,
         ],
+        'Favorite' => [
+            'LikeItFavorite' => 0,
+            'NotLikeFavorite' => 1,
+        ]
     ],
     'Tags' => [
         'Active' => [

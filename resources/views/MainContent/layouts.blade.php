@@ -24,6 +24,7 @@
         <script src="{{ asset('/static/js/register_modal.js') }}" defer></script>
         <script src="{{ asset('/static/js/edit_confirm_modal.js') }}" defer></script>
         <script src="/static/js/register_modal.js"></script>
+        <script src="/static/js/question_favorite.js"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
