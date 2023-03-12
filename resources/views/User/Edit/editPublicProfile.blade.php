@@ -15,7 +15,7 @@
                     <label class="">アカウントネーム</label>
                     <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border-2 border-pink-200 rounded-lg appearance-none formInput focus:outline-none focus:border-pink-500 hover:bg-pink-200 focus:ring-4 focus:ring-pink-300" type="text" placeholder="" aria-label="accountName" name="accountName" value="{{ $userInformation->account_name }}">
                     <label class="">自己紹介</label>
-                    <textarea style="line-height: 1.5; height:150px;" class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border-2 border-pink-200 rounded-lg appearance-none formInput focus:outline-none focus:border-pink-500 hover:bg-pink-200 focus:ring-4 focus:ring-pink-300" type="text"aria-label="myComment" name="myComment">{{ $userInformation->comment }}</textarea>
+                    <textarea style="line-height: 1.5; height:150px;" class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border-2 border-pink-200 rounded-lg appearance-none formInput focus:outline-none focus:border-pink-500 hover:bg-pink-200 focus:ring-4 focus:ring-pink-300" type="text" aria-label="myComment" name="myComment">{{ $userInformation->comment }}</textarea>
                     <label class="">プロフィール画像</label>
                     <input class="w-full px-2 py-2 my-1 mr-3 leading-tight text-gray-700 bg-transparent border-2 border-pink-200 rounded-lg appearance-none formInput focus:outline-none focus:border-pink-500 hover:bg-pink-200 focus:ring-4 focus:ring-pink-300" type="file" aria-label="myLogo" name="myLogo">
                     <label class="">プロフィール背景画像</label>

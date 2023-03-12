@@ -10,6 +10,7 @@ use App\Http\Controllers\MainContent\TopController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\ShowImageController;
 use App\Http\Controllers\Question\QuestionBoxController;
+use App\Http\Controllers\Question\QuestionCommentController;
 
 
 /*
@@ -27,9 +28,13 @@ Route::get('/', function () {
 });
 
 Route::prefix('FirstBaby')->group(function () {
+    //パブリックなルート
     Route::get('/top', [TopController::class, 'top'])->name('top');//アプリのトップページ
     Route::get('/delete/account/confirm', [TopController::class, 'accountDeleteSuccsess'])->name('accountDeleteSuccsess');//アカウント削除成功時の画面
+    Route::get('/Question/{id}', [QuestionBoxController::class, 'detail'])->name('question_detail');//質問の詳細画面
+    Route::get('/Question/search/{id}', [QuestionBoxController::class, 'search'])->name('question_search');//質問の検索
     Route::get('/Question', [QuestionBoxController::class, 'top'])->name('question_top');//質問箱のトップ
+    //ゲストのみ閲覧可能なルート
     Route::middleware('guest')->group(function () {
         Route::get('/welcome', [WelcomeController::class, 'welcome'])->name('welcome');//アプリのウェルカムページ
         Route::get('/login', [LoginController::class, 'login'])->name('login');//ログイン画面
@@ -38,6 +43,7 @@ Route::prefix('FirstBaby')->group(function () {
         Route::post('/register/process', [RegisterController::class, 'store'])->name('registerStore');//アカウント登録処理
         Route::get('/register/confirm', [RegisterController::class, 'confirm'])->name('registerConfirm');//登録完了画面
     });
+    //認証済みユーザーのみ閲覧可能なルート
     Route::middleware('auth')->group(function() {
         Route::post('/logout',[LoginController::class, 'logout'])->name('logout');//ログアウト処理
         Route::get('/mypage/{id}',[MyPageController::class, 'showMypage'])->name('showMypage');//マイページトップ
@@ -54,9 +60,8 @@ Route::prefix('FirstBaby')->group(function () {
         Route::post('/edit/image', [ShowImageController::class, 'editImages'])->name('editImages');//写真の削除、ダウンロード
         Route::get('/create/question', [QuestionBoxController::class, 'create'])->name('question_create');//質問の作成画面
         Route::post('/create/question/store', [QuestionBoxController::class, 'store'])->name('question_store');//質問の作成処理
-        Route::get('/Question/{id}', [QuestionBoxController::class, 'detail'])->name('question_detail');//質問の詳細画面
-        Route::get('/Question/search/{id}', [QuestionBoxController::class, 'search'])->name('question_search');//質問の検索
         Route::post('/Question/favorite', [QuestionBoxController::class, 'QuestionFavorities'])->name('QuestionFavorities');//質問へのいいね機能
+        Route::post('/create/comment', [QuestionCommentController::class,'createQuestionComment'])->name('createQuestionComment');//質問へのコメント作成
         Route::get('/test',[TestController::class,'index'])->name('index');
         Route::post('/test/post',[TestController::class,'create'])->name('create');
         Route::post('/test/test', [TestController::class,'test'])->name('create_test');

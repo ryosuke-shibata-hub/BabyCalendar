@@ -51,6 +51,12 @@ return [
         'Favorite' => [
             'LikeItFavorite' => 0,
             'NotLikeFavorite' => 1,
+        ],
+        'Comment' => [
+            'Active' => [
+                'Active' => 0,
+                'Disable' => 1,
+            ],
         ]
     ],
     'Tags' => [
