@@ -102,31 +102,31 @@ class QuestionBoxController extends Controller
 
     public function QuestionFavorities(Request $request)
     {
-
         $validator = Validator::make($request->all(),[
-            'question_id' => ['required','string'],
-            'user_id' => ['required','string'],
-            'favorite_flg' => ['required','string'],
+            'questionId' => ['required','string'],
+            'userId' => ['required','string'],
+            'favoriteFlg' => ['required','string'],
         ]);
         //バリデーションに引っかかるものは全て不正リクエストのため不正扱い
         if ($validator->fails()) {
             Log::alert("質問のいいねでバリデーション不正",[$validator->fails()]);
             return redirect(404);
         }
-
+        Log::alert('ばりでーとつうかしたお-');
         try {
 
             DB::beginTransaction();
 
-            $favoriteFlg = $request->favorite_flg;
-            $questionId = $request->question_id;
-            $userId = $request->user_id;
+            $favoriteFlg = $request->favoriteFlg;
+            $questionId = $request->questionId;
+            $userId = $request->userId;
 
             $favoriteStatus = QuestionFavorities::QuestionCreateFavorities($questionId, $userId, $favoriteFlg);
+            $questionFavoriteCount = QuestionFavorities::favoriteCount($questionId);
 
             DB::commit();
 
-            return redirect('/FirstBaby/Question');
+            return [$favoriteFlg,$questionFavoriteCount];
 
         } catch (\Throwable $th) {
             Log::error("質問のいいね処理で例外処理発生",['アカウントUUID',$userId,'質問のID',$questionId,$th]);

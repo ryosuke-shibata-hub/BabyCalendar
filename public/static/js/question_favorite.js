@@ -9,7 +9,8 @@ $(function () {
     //いいねの設定
     $('.questionFavoriteFlg').on('click', function () {
         var questionId = $(this).attr("questionId");
-        var favoriteFlg = $(this).attr("questoinFlg");
+        var favoriteFlg = $(this).attr("favoriteFlg");
+        var userId = $(this).attr("userId");
         var clickQuestionFavorite = $(this);
 
         stop_process(clickQuestionFavorite);
@@ -20,18 +21,20 @@ $(function () {
             },
             url: '/FirstBaby/Question/favorite',
             type: 'POST',
-            data: {'questionId':questionId, 'favoriteFlg':favoriteFlg},
+            data: {'questionId':questionId, 'favoriteFlg':favoriteFlg, 'userId':userId},
         })
         .done(function (data) {
-            $('#questionFavoriteCount' + questionId).text(data[1].change());
-
+            //データ更新成功後にカウント再取得してカウント数のみ更新
+            $('#questionFavoriteCount' + questionId).text(data[1]).change();
+            //いいねを押して時にスタイルとフラグを変更
             if (data[0] == 0) {
                 clickQuestionFavorite.attr('favoriteFlg', '1');
-                clickQuestionFavorite.children().attr('class', 'fa-regular fa-heart');
+                clickQuestionFavorite.children().attr('class', 'text-pink-400 fa-solid fa-heart');
             }
+            //いいねを解除した時
             if (data[0] == 1) {
                 clickQuestionFavorite.attr('favoriteFlg', '0');
-                clickQuestionFavorite.children().attr('class', 'fa-solid fa-heart');
+                clickQuestionFavorite.children().attr('class', 'fa-regular fa-heart');
             }
         })
         .fail(function (data) {

@@ -19,6 +19,8 @@ class QuestionFavorities extends Model
         $LikeItFavorite = config('const.QuestionBox.Favorite.LikeItFavorite');
         $NotLikeFavorite = config('const.QuestionBox.Favorite.NotLikeFavorite');
 
+        Log::alert([$questionId,$userId,$favoriteFlg]);
+
         if ($favoriteFlg == $LikeItFavorite) {
             $data = new QuestionFavorities();
             $data->account_uuid = $userId;
@@ -38,5 +40,17 @@ class QuestionFavorities extends Model
         } else {
             Log::alert("質問のいいねで不正リクエスト",['リクエストされたフラグ',$favoriteFlg]);
         }
+    }
+
+    public static function favoriteCount($questionId)
+    {
+        $data = DB::table('question_favorities')
+        ->select(
+            'question_id',
+        )
+        ->where('question_id',$questionId)
+        ->count();
+
+        return $data;
     }
 }
